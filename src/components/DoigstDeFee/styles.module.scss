@@ -1,0 +1,49 @@
+.work {
+    .header {
+        display: flex;
+        gap: 50px;
+        justify-content: space-between;
+        .banner {
+            border-radius: 8px;
+            width: 50%;
+        }
+        .text {
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            .textHeader {
+                display: flex;
+                flex-direction: column;
+                gap: 30px;
+                .title p {
+                    font-size: 137px;
+                    line-height: 137px;
+                    margin-top: -15px;
+                }
+                .subtitle {
+                    font-size: 30px;
+                    line-height: 30px;
+                    font-weight: 500;
+                }
+            }
+            .infos {
+                display: flex;
+                flex-direction: column;
+                font-family: 'Helvetica Neue';
+                font-size: 24px;
+                font-weight: 400;
+                gap: 25px;
+                .row {
+                    display: flex;
+                    justify-content: space-between;
+                    .light {
+                        font-size: 22px;
+                        font-weight: 300;
+                        color: rgba(255, 255, 255, 0.3);
+                    }
+                }
+            }
+        }
+    }
+}

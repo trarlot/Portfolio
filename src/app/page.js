@@ -1,95 +1,60 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import CarousselWrapper from '@/components/CarousselWrapper';
 
-export default function Home() {
-  return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
+import { cardDetails, cardMiddle } from './caroussel-config';
+import styles from './page.module.css';
+
+// Fonction pour randomiser les clés d'un objet
+const getRandomizedKeys = (obj) => {
+    // Obtenez les valeurs de l'objet
+    const values = Object.values(obj);
+
+    // Mélangez les valeurs
+    const shuffled = values.sort(() => Math.random() - 0.5);
+    return shuffled;
+};
+
+export default async function Home() {
+    // Randomiser les cartes
+    const randomizedKeys1 = getRandomizedKeys(cardDetails).slice(0, 10);
+    const randomizedKeys2 = getRandomizedKeys(cardDetails).slice(0, 10);
+    const randomizedKeys3 = getRandomizedKeys(cardDetails).slice(0, 10);
+
+    // Transformer cardMiddle en tableau
+    const fixedImages = Object.values(cardMiddle).map((item) => ({
+        imgUrl: item.imgUrl,
+        title: item.title,
+        hover: item.hover,
+        id: item.id,
+    }));
+
+    const insertFixedImages = (cardKeys, fixedImages) => {
+        let newCardList = [];
+        let fixedIndex = 0;
+
+        cardKeys.forEach((key, index) => {
+            newCardList.push(randomizedKeys3[index]);
+            if ((index + 1) % 2 === 0 && fixedIndex < fixedImages.length) {
+                newCardList.push(fixedImages[fixedIndex]);
+                fixedIndex++;
+            }
+        });
+
+        return newCardList;
+    };
+
+    // Randomisation et ajout des images fixes
+    const randomizedAndFixedCards = insertFixedImages(
+        getRandomizedKeys(cardDetails),
+        fixedImages,
+    );
+
+    return (
+        <main className={styles.main}>
+            <CarousselWrapper
+                randomizedKeys1={randomizedKeys1}
+                randomizedKeys2={randomizedKeys2}
+                randomizedAndFixedCards={randomizedAndFixedCards}
             />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  );
+        </main>
+    );
 }

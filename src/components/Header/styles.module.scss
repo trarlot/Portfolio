@@ -1,0 +1,13 @@
+.header {
+    display: flex;
+    padding: 30px 0;
+    background-color: transparent;
+    position: fixed;
+    z-index: 99;
+    p {
+        margin-left: 30px;
+        color: white;
+        font-size: 20px;
+        font-family: 'Helvetica Neue';
+    }
+}
