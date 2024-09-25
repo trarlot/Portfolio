@@ -4,6 +4,7 @@
     width: 100%;
     gap: 150px;
     position: fixed;
+    z-index: 4;
     transform: rotateY(30deg) rotateX(41deg) rotateZ(-15deg);
     .caroussel {
         display: flex;
@@ -18,7 +19,7 @@
         position: absolute;
         &:first-child {
             top: -20vh;
-            left: -50%;
+            left: -100%;
         }
 
         &:last-child {

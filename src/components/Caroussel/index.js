@@ -1,3 +1,4 @@
+'use client';
 import styles from './styles.module.scss';
 import stylesMain from '../../app/page.module.css';
 import { useRef, useEffect } from 'react';
@@ -11,6 +12,7 @@ export default function Caroussel({
     randomizedKeys1,
     randomizedKeys2,
 }) {
+    const { isOpen, toggleModal } = useModalContext();
     const firstDiv = useRef(null);
     const secondDiv = useRef(null);
     const thirdDiv = useRef(null);
@@ -18,23 +20,33 @@ export default function Caroussel({
     const slider = useRef(null);
     let xPercent = 0;
     let direction = -1;
-    let containerWidth;
-    const { toggleModal } = useModalContext(); // On récupère toggleModal du contexte
+    let animationFrameId;
+
+    const preventScroll = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+    };
 
     useEffect(() => {
+        // Initialisation de la position des divs
         if (secondDiv.current) {
             secondDiv.current.style.left = firstDiv.current.offsetWidth + 'px';
         }
         if (fourthDiv.current) {
             fourthDiv.current.style.left = -thirdDiv.current.offsetWidth + 'px';
         }
-        containerWidth = slider.current.offsetWidth;
         document.querySelector(`.${stylesMain.main}`).style.height =
-            containerWidth * 2 + 'px';
+            slider.current.offsetWidth + 'px';
+
+        requestAnimationFrame(animate);
+    }, []);
+
+    useEffect(() => {
         gsap.registerPlugin(ScrollTrigger);
 
-        gsap.to([firstDiv.current, secondDiv.current], {
+        const animation1 = gsap.to([firstDiv.current, secondDiv.current], {
             scrollTrigger: {
+                id: 'animation1',
                 trigger: `.${styles.container}`,
                 scrub: 0.25,
                 start: 0,
@@ -43,8 +55,10 @@ export default function Caroussel({
             },
             x: '1300px',
         });
-        gsap.to([thirdDiv.current, fourthDiv.current], {
+
+        const animation2 = gsap.to([thirdDiv.current, fourthDiv.current], {
             scrollTrigger: {
+                id: 'animation2',
                 trigger: `.${styles.container}`,
                 scrub: 0.25,
                 start: 0,
@@ -54,19 +68,68 @@ export default function Caroussel({
             x: '-1300px',
         });
 
-        gsap.to(slider.current, {
+        const scrollTriggerAnim = gsap.to(slider.current, {
             xPercent: -80,
             ease: 'none',
             scrollTrigger: {
+                id: 'scrollTriggerAnim',
                 trigger: `.${stylesMain.main}`,
                 start: 'top top',
-                scrub: true,
+                scrub: 0.5,
                 end: 'bottom bottom',
             },
         });
 
-        requestAnimationFrame(animate);
+        return () => {
+            animation1.kill();
+            animation2.kill();
+            scrollTriggerAnim.kill();
+        };
     }, []);
+
+    useEffect(() => {
+        if (isOpen) {
+            // Désactiver les ScrollTriggers
+            ScrollTrigger.getById('animation1')?.disable();
+            ScrollTrigger.getById('animation2')?.disable();
+            ScrollTrigger.getById('scrollTriggerAnim')?.disable();
+        } else {
+            // Réactiver les ScrollTriggers
+            ScrollTrigger.getById('animation1')?.enable();
+            ScrollTrigger.getById('animation2')?.enable();
+            ScrollTrigger.getById('scrollTriggerAnim')?.enable();
+            ScrollTrigger.refresh(); // Rafraîchir le ScrollTrigger
+        }
+
+        // Ajouter/Supprimer les écouteurs d'événements
+        if (isOpen) {
+            document.addEventListener('wheel', preventScroll, {
+                passive: false,
+            });
+            document.addEventListener('touchmove', preventScroll, {
+                passive: false,
+            });
+            document.addEventListener('keydown', preventScroll, {
+                passive: false,
+            });
+            document.addEventListener('keyup', preventScroll, {
+                passive: false,
+            });
+        } else {
+            document.removeEventListener('wheel', preventScroll);
+            document.removeEventListener('touchmove', preventScroll);
+            document.removeEventListener('keydown', preventScroll);
+            document.removeEventListener('keyup', preventScroll);
+        }
+
+        return () => {
+            // Nettoyage des écouteurs d'événements lors du démontage
+            document.removeEventListener('wheel', preventScroll);
+            document.removeEventListener('touchmove', preventScroll);
+            document.removeEventListener('keydown', preventScroll);
+            document.removeEventListener('keyup', preventScroll);
+        };
+    }, [isOpen]);
 
     const animate = () => {
         if (xPercent < -100) {
@@ -78,13 +141,12 @@ export default function Caroussel({
         gsap.set(secondDiv.current, { xPercent: xPercent });
         gsap.set(thirdDiv.current, { xPercent: -xPercent });
         gsap.set(fourthDiv.current, { xPercent: -xPercent });
-        requestAnimationFrame(animate);
+        animationFrameId = requestAnimationFrame(animate);
         xPercent += 0.01 * direction;
     };
 
-    // Passe la carte cliquée à `toggleModal`
     const handleCardClick = (card) => {
-        toggleModal(card); // Passe la carte cliquée
+        toggleModal(card);
     };
 
     return (
@@ -99,10 +161,7 @@ export default function Caroussel({
                         />
                     ))}
                 </div>
-                <div
-                    id={styles.copy1}
-                    ref={secondDiv}
-                    className={styles.caroussel}>
+                <div ref={secondDiv} className={styles.caroussel}>
                     {randomizedKeys1.map((card, index) => (
                         <Card
                             key={index}
@@ -141,10 +200,7 @@ export default function Caroussel({
                         />
                     ))}
                 </div>
-                <div
-                    id={styles.copy1}
-                    ref={fourthDiv}
-                    className={styles.caroussel}>
+                <div ref={fourthDiv} className={styles.caroussel}>
                     {randomizedKeys2.map((card, index) => (
                         <Card
                             key={index}

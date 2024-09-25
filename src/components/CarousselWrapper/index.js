@@ -15,8 +15,8 @@ function CarousselContent({
 }) {
     const { isOpen, selectedCard, toggleModal } = useModalContext(); // Récupère l'état de la carte sélectionnée et la fonction pour changer l'état
     const [currentComponent, setCurrentComponent] = useState(null); // État pour le composant à afficher
-    const modalRef = useRef(null); // Référence pour la modal
-    const overlayRef = useRef(null); // Référence pour l'overlay
+    const modalRef = useRef(null);
+    const overlayRef = useRef(null);
 
     useEffect(() => {
         const lenis = new Lenis();

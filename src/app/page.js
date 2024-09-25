@@ -1,5 +1,4 @@
 import CarousselWrapper from '@/components/CarousselWrapper';
-
 import { cardDetails, cardMiddle } from './caroussel-config';
 import styles from './page.module.css';
 
