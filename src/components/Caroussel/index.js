@@ -21,6 +21,7 @@ export default function Caroussel({
     let xPercent = 0;
     let direction = -1;
     let animationFrameId;
+    let savedPosition;
 
     const preventScroll = (e) => {
         e.preventDefault();
@@ -69,7 +70,7 @@ export default function Caroussel({
         });
 
         const scrollTriggerAnim = gsap.to(slider.current, {
-            xPercent: -80,
+            xPercent: -65,
             ease: 'none',
             scrollTrigger: {
                 id: 'scrollTriggerAnim',
@@ -88,19 +89,6 @@ export default function Caroussel({
     }, []);
 
     useEffect(() => {
-        if (isOpen) {
-            // Désactiver les ScrollTriggers
-            ScrollTrigger.getById('animation1')?.disable();
-            ScrollTrigger.getById('animation2')?.disable();
-            ScrollTrigger.getById('scrollTriggerAnim')?.disable();
-        } else {
-            // Réactiver les ScrollTriggers
-            ScrollTrigger.getById('animation1')?.enable();
-            ScrollTrigger.getById('animation2')?.enable();
-            ScrollTrigger.getById('scrollTriggerAnim')?.enable();
-            ScrollTrigger.refresh(); // Rafraîchir le ScrollTrigger
-        }
-
         // Ajouter/Supprimer les écouteurs d'événements
         if (isOpen) {
             document.addEventListener('wheel', preventScroll, {
