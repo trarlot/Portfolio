@@ -4,39 +4,46 @@
     left: 0;
     right: 0;
     bottom: 0;
+    overflow: scroll;
     background-color: rgba(0, 0, 0, 0.7); // Ajuste l'opacité ici
     z-index: 5; // Assurez-vous que l'overlay est au-dessus du contenu
     opacity: 0; // Départ transparent
 }
-.ref {
-    max-width: 1000px;
+.containerModal {
     width: 100%;
-    justify-self: center;
-    background-color: #202020;
-    position: fixed;
-    height: 200vh;
-    z-index: 9; // Doit être plus élevé que l'overlay
-
-    top: 5vh;
-    padding: 70px;
-    box-sizing: border-box;
-    margin: 0 auto;
-    border-radius: 11px;
-    .cross {
-        width: 35px;
-        height: 35px;
-        background-color: white;
-        position: absolute;
-        right: 20px;
-        top: 20px;
-        border-radius: 50%;
-        display: flex;
-        transition: 0.2s;
-        align-items: center;
-        justify-content: center;
-        &:hover {
-            cursor: pointer;
-            box-shadow: 0 0 12px 0px white;
+    height: 100%;
+    overflow: scroll;
+    display: flex;
+    justify-content: center;
+    .ref {
+        max-width: 1000px;
+        width: 100%;
+        justify-self: center;
+        background-color: #202020;
+        position: fixed;
+        height: 200vh;
+        z-index: 9; // Doit être plus élevé que l'overlay
+        top: 5vh;
+        padding: 70px;
+        box-sizing: border-box;
+        margin: 0 auto;
+        border-radius: 11px;
+        .cross {
+            width: 35px;
+            height: 35px;
+            background-color: white;
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            border-radius: 50%;
+            display: flex;
+            transition: 0.2s;
+            align-items: center;
+            justify-content: center;
+            &:hover {
+                cursor: pointer;
+                box-shadow: 0 0 12px 0px white;
+            }
         }
     }
 }

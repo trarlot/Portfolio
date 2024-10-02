@@ -3,6 +3,9 @@ import Image from 'next/image';
 
 import { Saira_Condensed } from 'next/font/google';
 import ddf from '@/../public/assets/bannerDDF.jpg';
+import ddf1 from '@/../public/assets/DDF1.jpg';
+import ddf2 from '@/../public/assets/DDF2.jpg';
+import ddf3 from '@/../public/assets/DDF3.jpg';
 const saira_init = Saira_Condensed({
     weight: ['800'],
     subsets: ['latin'],
@@ -46,6 +49,27 @@ export default function DoigtsDeFee() {
                     </div>
                 </div>
             </div>
+            {/* <Image
+                className={styles.frame}
+                src={ddf1}
+                width={737}
+                height={640}
+                alt="Doigts de fée frame 1"
+            />
+            <Image
+                className={styles.frame}
+                src={ddf2}
+                width={737}
+                height={640}
+                alt="Doigts de fée frame 2"
+            />
+            <Image
+                className={styles.frame}
+                src={ddf3}
+                width={737}
+                height={640}
+                alt="Doigts de fée frame 3"
+            /> */}
         </div>
     );
 }

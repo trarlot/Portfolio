@@ -1,9 +1,10 @@
 'use client';
 import styles from './styles.module.scss';
 import stylesMain from '../../app/page.module.css';
+import stylesCard from '../Caroussel/Card/styles.module.scss';
 import { useRef, useEffect } from 'react';
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/all';
+import { ScrollTrigger, ScrollToPlugin } from 'gsap/all';
 import Card from './Card';
 import { useModalContext } from '@/context/modalContext';
 
@@ -18,15 +19,13 @@ export default function Caroussel({
     const thirdDiv = useRef(null);
     const fourthDiv = useRef(null);
     const slider = useRef(null);
+    const container = useRef(null);
+    const isScrollEnabledRef = useRef(true); // Utilisation de useRef pour stocker l'état du scroll
+    const isAnimatingRef = useRef(false); // Nouvelle référence pour suivre l'état de l'animation
     let xPercent = 0;
+    let limit = 0;
     let direction = -1;
     let animationFrameId;
-    let savedPosition;
-
-    const preventScroll = (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-    };
 
     useEffect(() => {
         // Initialisation de la position des divs
@@ -36,86 +35,82 @@ export default function Caroussel({
         if (fourthDiv.current) {
             fourthDiv.current.style.left = -thirdDiv.current.offsetWidth + 'px';
         }
-        document.querySelector(`.${stylesMain.main}`).style.height =
-            slider.current.offsetWidth + 'px';
 
         requestAnimationFrame(animate);
     }, []);
 
     useEffect(() => {
-        gsap.registerPlugin(ScrollTrigger);
+        gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-        const animation1 = gsap.to([firstDiv.current, secondDiv.current], {
-            scrollTrigger: {
-                id: 'animation1',
-                trigger: `.${styles.container}`,
-                scrub: 0.25,
-                start: 0,
-                endTrigger: `.${stylesMain.main}`,
-                end: 'bottom bottom',
-            },
-            x: '1300px',
-        });
+        // Fonction pour gérer le scroll avec un laps de temps entre les scrolls
+        const handleScroll = (event) => {
+            if (!isScrollEnabledRef.current) return; // Vérification de l'état d'animation
 
-        const animation2 = gsap.to([thirdDiv.current, fourthDiv.current], {
-            scrollTrigger: {
-                id: 'animation2',
-                trigger: `.${styles.container}`,
-                scrub: 0.25,
-                start: 0,
-                endTrigger: `.${stylesMain.main}`,
-                end: 'bottom bottom',
-            },
-            x: '-1300px',
-        });
+            const cardElements = document.getElementsByClassName(
+                stylesCard.card,
+            );
+            const deltaY = event.deltaY;
+            const shift =
+                cardElements[0].getBoundingClientRect().width * 2 + 317;
 
-        const scrollTriggerAnim = gsap.to(slider.current, {
-            xPercent: -65,
-            ease: 'none',
-            scrollTrigger: {
-                id: 'scrollTriggerAnim',
-                trigger: `.${stylesMain.main}`,
-                start: 'top top',
-                scrub: 0.5,
-                end: 'bottom bottom',
-            },
-        });
+            if (Math.abs(deltaY) < 10) return; // Ne rien faire si le deltaY est trop faible
 
-        return () => {
-            animation1.kill();
-            animation2.kill();
-            scrollTriggerAnim.kill();
+            isScrollEnabledRef.current = false;
+            isAnimatingRef.current = true; // Indiquer que l'animation a commencé
+
+            if (deltaY < 0) {
+                gsap.to([firstDiv.current, secondDiv.current], {
+                    duration: 0.8,
+                    ease: 'power1.inOut',
+                    x: '+=500px',
+                });
+
+                gsap.to([thirdDiv.current, fourthDiv.current], {
+                    duration: 0.8,
+                    ease: 'power1.inOut',
+                    x: '+=500px',
+                });
+                // Scrolling vers le bas
+                gsap.to(slider.current, {
+                    duration: 0.8,
+                    ease: 'power1.inOut',
+                    x: `+=${shift}`,
+                    onComplete: () => {
+                        isScrollEnabledRef.current = true; // Réactiver le scroll
+                    },
+                });
+            } else {
+                gsap.to([firstDiv.current, secondDiv.current], {
+                    duration: 0.8,
+                    ease: 'power1.inOut',
+                    x: '-=500px',
+                });
+
+                gsap.to([thirdDiv.current, fourthDiv.current], {
+                    duration: 0.8,
+                    ease: 'power1.inOut',
+                    x: '-=500px',
+                });
+                // Scrolling vers le haut
+                gsap.to(slider.current, {
+                    duration: 0.8,
+                    ease: 'power1.inOut',
+                    x: `-=${shift}`,
+                    onComplete: () => {
+                        isScrollEnabledRef.current = true; // Réactiver le scroll
+                    },
+                });
+            }
         };
-    }, []);
 
-    useEffect(() => {
-        // Ajouter/Supprimer les écouteurs d'événements
         if (isOpen) {
-            document.addEventListener('wheel', preventScroll, {
-                passive: false,
-            });
-            document.addEventListener('touchmove', preventScroll, {
-                passive: false,
-            });
-            document.addEventListener('keydown', preventScroll, {
-                passive: false,
-            });
-            document.addEventListener('keyup', preventScroll, {
-                passive: false,
-            });
+            container.current.removeEventListener('wheel', handleScroll);
         } else {
-            document.removeEventListener('wheel', preventScroll);
-            document.removeEventListener('touchmove', preventScroll);
-            document.removeEventListener('keydown', preventScroll);
-            document.removeEventListener('keyup', preventScroll);
+            container.current.addEventListener('wheel', handleScroll);
         }
 
         return () => {
-            // Nettoyage des écouteurs d'événements lors du démontage
-            document.removeEventListener('wheel', preventScroll);
-            document.removeEventListener('touchmove', preventScroll);
-            document.removeEventListener('keydown', preventScroll);
-            document.removeEventListener('keyup', preventScroll);
+            container.current.removeEventListener('wheel', handleScroll);
         };
     }, [isOpen]);
 
@@ -138,7 +133,7 @@ export default function Caroussel({
     };
 
     return (
-        <div className={styles.container}>
+        <div ref={container} className={styles.container}>
             <div className={styles.caroussel_container}>
                 <div ref={firstDiv} className={styles.caroussel}>
                     {randomizedKeys1.map((card, index) => (
