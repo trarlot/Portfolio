@@ -1,5 +1,12 @@
 import styles from './styles.module.scss';
-import Image from 'next/image';
-export default function Modal({ children }) {
-    return <div className={styles.modal}>{children}</div>;
-}
+import React, { forwardRef } from 'react';
+
+const Modal = forwardRef(({ children, ...props }, ref) => {
+    return (
+        <div ref={ref} className="modal" {...props}>
+            {children}
+        </div>
+    );
+});
+
+export default Modal;

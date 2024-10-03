@@ -1,10 +1,9 @@
 'use client';
 import styles from './styles.module.scss';
 import stylesMain from '../../app/page.module.css';
-import stylesCard from '../Caroussel/Card/styles.module.scss';
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect } from 'react';
 import gsap from 'gsap';
-import { ScrollTrigger, ScrollToPlugin } from 'gsap/all';
+import { ScrollTrigger } from 'gsap/all';
 import Card from './Card';
 import { useModalContext } from '@/context/modalContext';
 
@@ -14,159 +13,124 @@ export default function Caroussel({
     randomizedKeys2,
 }) {
     const { isOpen, toggleModal } = useModalContext();
-    const [limit, setLimit] = useState(0);
     const firstDiv = useRef(null);
     const secondDiv = useRef(null);
     const thirdDiv = useRef(null);
     const fourthDiv = useRef(null);
-    const slider = useRef(null);
     const container = useRef(null);
-    const isScrollEnabledRef = useRef(true);
+    const slider = useRef(null);
     let xPercent = 0;
     let direction = -1;
     let animationFrameId;
-    let startY = 0; // To track touch start position
+    const isAnimatingRef = useRef(true); // Utilisation d'un ref pour gérer l'animation
+    const scrollTimeoutRef = useRef(null); // Référence pour le délai de défilement
+
+    const preventScroll = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+    };
 
     useEffect(() => {
+        // Initialisation de la position des divs
         if (secondDiv.current) {
             secondDiv.current.style.left = firstDiv.current.offsetWidth + 'px';
         }
         if (fourthDiv.current) {
             fourthDiv.current.style.left = -thirdDiv.current.offsetWidth + 'px';
         }
+        document.querySelector(`.${stylesMain.main}`).style.height =
+            slider.current.offsetWidth + 'px';
+
         requestAnimationFrame(animate);
     }, []);
 
     useEffect(() => {
-        gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+        gsap.registerPlugin(ScrollTrigger);
 
-        const handleScroll = (deltaY) => {
-            if (!isScrollEnabledRef.current) return;
+        const animation1 = gsap.to([firstDiv.current, secondDiv.current], {
+            scrollTrigger: {
+                id: 'animation1',
+                trigger: `.${styles.container}`,
+                scrub: 0.25,
+                start: 0,
+                endTrigger: `.${stylesMain.main}`,
+                end: 'bottom bottom',
+            },
+            x: '-1000px',
+        });
 
-            const cardElements = document.getElementsByClassName(
-                stylesCard.card,
-            );
-            const shift =
-                cardElements[0].getBoundingClientRect().width * 2 + 317;
+        const animation2 = gsap.to([thirdDiv.current, fourthDiv.current], {
+            scrollTrigger: {
+                id: 'animation2',
+                trigger: `.${styles.container}`,
+                scrub: 0.25,
+                start: 0,
+                endTrigger: `.${stylesMain.main}`,
+                end: 'bottom bottom',
+            },
+            x: '-1000px',
+        });
 
-            isScrollEnabledRef.current = false;
-
-            if (deltaY < 0 && limit > 0) {
-                gsap.to([firstDiv.current, secondDiv.current], {
-                    duration: 0.8,
-                    ease: 'power1.inOut',
-                    x: '+=500px',
-                    force3D: true,
-                });
-                gsap.to([thirdDiv.current, fourthDiv.current], {
-                    duration: 0.8,
-                    ease: 'power1.inOut',
-                    x: '+=500px',
-                    force3D: true,
-                });
-                gsap.to(slider.current, {
-                    duration: 0.8,
-                    ease: 'power1.inOut',
-                    x: `+=${shift}`,
-                    force3D: true,
-
-                    onComplete: () => {
-                        setLimit((prevLimit) => prevLimit - 1);
-                        isScrollEnabledRef.current = true;
-                    },
-                });
-            } else if (deltaY > 0 && limit < 3) {
-                gsap.to([firstDiv.current, secondDiv.current], {
-                    duration: 0.8,
-                    ease: 'power1.inOut',
-                    x: '-=500px',
-                    force3D: true,
-                });
-                gsap.to([thirdDiv.current, fourthDiv.current], {
-                    duration: 0.8,
-                    ease: 'power1.inOut',
-                    x: '-=500px',
-                    force3D: true,
-                });
-                gsap.to(slider.current, {
-                    duration: 0.8,
-                    ease: 'power1.inOut',
-                    x: `-=${shift}`,
-                    force3D: true,
-
-                    onComplete: () => {
-                        setLimit((prevLimit) => prevLimit + 1);
-                        isScrollEnabledRef.current = true;
-                    },
-                });
-            } else {
-                isScrollEnabledRef.current = true;
-            }
-        };
-
-        const handleWheel = (event) => {
-            const deltaY = event.deltaY;
-            if (Math.abs(deltaY) >= 10) handleScroll(deltaY);
-        };
-
-        const handleTouchStart = (event) => {
-            startY = event.touches[0].clientY;
-        };
-
-        const handleTouchMove = (event) => {
-            const touchMoveY = event.touches[0].clientY;
-            const deltaY = startY - touchMoveY;
-            if (Math.abs(deltaY) > 10) {
-                handleScroll(deltaY);
-            }
-        };
-
-        const handleKeydown = (event) => {
-            if (event.key === 'ArrowRight') {
-                handleScroll(100); // Scroll right
-            } else if (event.key === 'ArrowLeft') {
-                handleScroll(-100); // Scroll left
-            }
-        };
-
-        if (isOpen) {
-            container.current.removeEventListener('wheel', handleWheel);
-            container.current.removeEventListener(
-                'touchstart',
-                handleTouchStart,
-            );
-            container.current.removeEventListener('touchmove', handleTouchMove);
-            document.removeEventListener('keydown', handleKeydown);
-        } else {
-            container.current.addEventListener('wheel', handleWheel);
-            container.current.addEventListener('touchstart', handleTouchStart);
-            container.current.addEventListener('touchmove', handleTouchMove);
-            document.addEventListener('keydown', handleKeydown);
-        }
+        const scrollTriggerAnim = gsap.to(slider.current, {
+            xPercent: -50,
+            ease: 'none',
+            scrollTrigger: {
+                id: 'scrollTriggerAnim',
+                trigger: `.${stylesMain.main}`,
+                start: 'top top',
+                scrub: 0.5,
+                end: 'bottom bottom',
+            },
+        });
 
         return () => {
-            container.current.removeEventListener('wheel', handleWheel);
-            container.current.removeEventListener(
-                'touchstart',
-                handleTouchStart,
-            );
-            container.current.removeEventListener('touchmove', handleTouchMove);
-            document.removeEventListener('keydown', handleKeydown);
+            animation1.kill();
+            animation2.kill();
+            scrollTriggerAnim.kill();
         };
-    }, [isOpen, limit]);
+    }, []);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            isAnimatingRef.current = false; // Mettre l'animation en pause
+            cancelAnimationFrame(animationFrameId); // Annuler l'animation en cours
+
+            // Réinitialiser le délai de défilement
+            if (scrollTimeoutRef.current) {
+                clearTimeout(scrollTimeoutRef.current);
+            }
+
+            isAnimatingRef.current = true; // Reprendre l'animation
+            requestAnimationFrame(animate); // Redémarrer l'animation
+        };
+
+        // Ajouter un écouteur d'événements pour le scroll
+        window.addEventListener('scroll', handleScroll);
+
+        return () => {
+            // Nettoyage des écouteurs d'événements lors du démontage
+            window.removeEventListener('scroll', handleScroll);
+            if (scrollTimeoutRef.current) {
+                clearTimeout(scrollTimeoutRef.current);
+            }
+        };
+    }, []);
 
     const animate = () => {
-        if (xPercent < -100) {
-            xPercent = 0;
-        } else if (xPercent > 0) {
-            xPercent = -100;
+        if (isAnimatingRef.current) {
+            // Exécuter l'animation seulement si isAnimatingRef.current est true
+            if (xPercent < -100) {
+                xPercent = 0;
+            } else if (xPercent > 0) {
+                xPercent = -100;
+            }
+            gsap.set(firstDiv.current, { xPercent: xPercent });
+            gsap.set(secondDiv.current, { xPercent: xPercent });
+            gsap.set(thirdDiv.current, { xPercent: -xPercent });
+            gsap.set(fourthDiv.current, { xPercent: -xPercent });
+            animationFrameId = requestAnimationFrame(animate);
+            xPercent += 0.01 * direction;
         }
-        gsap.set(firstDiv.current, { xPercent: xPercent });
-        gsap.set(secondDiv.current, { xPercent: xPercent });
-        gsap.set(thirdDiv.current, { xPercent: -xPercent });
-        gsap.set(fourthDiv.current, { xPercent: -xPercent });
-        animationFrameId = requestAnimationFrame(animate);
-        xPercent += 0.01 * direction;
     };
 
     const handleCardClick = (card) => {

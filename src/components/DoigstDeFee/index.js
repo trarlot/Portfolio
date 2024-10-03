@@ -49,27 +49,42 @@ export default function DoigtsDeFee() {
                     </div>
                 </div>
             </div>
-            {/* <Image
-                className={styles.frame}
-                src={ddf1}
-                width={737}
-                height={640}
-                alt="Doigts de fée frame 1"
-            />
-            <Image
-                className={styles.frame}
-                src={ddf2}
-                width={737}
-                height={640}
-                alt="Doigts de fée frame 2"
-            />
-            <Image
-                className={styles.frame}
-                src={ddf3}
-                width={737}
-                height={640}
-                alt="Doigts de fée frame 3"
-            /> */}
+            <div className={styles.header}>
+                <Image
+                    className={styles.banner}
+                    src={ddf}
+                    width={420}
+                    height={700}
+                    alt="Doigts de fée home page"
+                />
+                <div className={styles.text}>
+                    <div className={styles.textHeader}>
+                        <div className={styles.title}>
+                            <p className={saira_init.className}>DOIGTS</p>
+                            <p className={saira_init.className}>DE</p>
+                            <p className={saira_init.className}>FEE</p>
+                        </div>
+                        <p
+                            className={`${styles.subtitle}  ${saira_init.className}`}>
+                            The website of a nail artist
+                        </p>
+                    </div>
+                    <div className={styles.infos}>
+                        <div className={styles.row}>
+                            <p>DATE</p>
+                            <p className={styles.light}>July 2024</p>
+                        </div>
+                        <div className={styles.row}>
+                            <p>ROLES</p>
+                            <p className={styles.light}>Developper, Designer</p>
+                        </div>
+                        <div className={styles.row}>
+                            <p>TECHS</p>
+                            <p className={styles.light}>React, Figma, GSAP</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }

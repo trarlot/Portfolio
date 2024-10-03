@@ -3,12 +3,15 @@
     height: 100vh;
     width: 100%;
     gap: 150px;
+    will-change: transform;
+
     position: fixed;
     z-index: 4;
     transform: rotateY(30deg) rotateX(41deg) rotateZ(-15deg);
     .caroussel {
         display: flex;
         position: absolute;
+        will-change: transform;
         left: 0;
         z-index: 5;
         justify-content: center;

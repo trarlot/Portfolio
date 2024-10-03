@@ -9,20 +9,25 @@
     z-index: 5; // Assurez-vous que l'overlay est au-dessus du contenu
     opacity: 0; // Départ transparent
 }
-.containerModal {
-    width: 100%;
-
+.container_modal {
     display: flex;
     justify-content: center;
+    position: fixed;
+    overflow-y: auto;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9;
+    top: 0;
     .ref {
         max-width: 1000px;
         width: 100%;
         justify-self: center;
         background-color: #202020;
+        height: fit-content;
         z-index: 9; // Doit être plus élevé que l'overlay
         padding: 70px;
         box-sizing: border-box;
-        margin: 0 auto;
+        margin: 70px auto;
         border-radius: 11px;
         .cross {
             width: 35px;

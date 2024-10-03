@@ -9,7 +9,9 @@ import DoigtsDeFee from '../DoigstDeFee';
 import Lenis from 'lenis';
 import { useModalContext, ModalProvider } from '@/context/modalContext';
 
-gsap.registerPlugin(ScrollTrigger); // Enregistre ScrollTrigger pour l'utiliser
+const allowScroll = (e) => {
+    e.stopPropagation();
+};
 
 function CarousselContent({
     randomizedKeys1,
@@ -19,6 +21,7 @@ function CarousselContent({
     const { isOpen, selectedCard, toggleModal } = useModalContext();
     const [currentComponent, setCurrentComponent] = useState(null);
     const modalRef = useRef(null);
+    const container_modal = useRef(null);
     const overlayRef = useRef(null);
 
     useEffect(() => {
@@ -47,32 +50,28 @@ function CarousselContent({
 
     useEffect(() => {
         if (isOpen) {
+            document.getElementsByTagName('body')[0].style.overflow = 'hidden';
             // Animation d'ouverture de la modal
             gsap.fromTo(
                 modalRef.current,
-                { y: '150vh' }, // Départ en bas de l'écran
-                { y: '5vh', duration: 0.5, ease: 'power2.out' },
+                { y: '150vh' }, // Départ de l'animation (hors de l'écran)
+                { y: '0', duration: 0.5, ease: 'power2.out' },
             );
 
             // Animation d'apparition de l'overlay
             gsap.fromTo(
                 overlayRef.current,
-                { opacity: 0 },
-                { opacity: 1, duration: 0.5 },
+                { opacity: 0 }, // Départ de l'animation (transparent)
+                { opacity: 1, duration: 0.5 }, // Devient opaque
             );
 
-            // Activation de ScrollTrigger pour le contenu de la modal
-            ScrollTrigger.create({
-                trigger: modalRef.current,
-                start: 'top top',
-                end: 'bottom bottom',
-                scrub: true,
-                markers: false, // Affiche des marqueurs pour tester si besoin
-                onEnter: () => console.log('Modal scrolling activated!'),
+            // Ajouter un écouteur d'événements pour le défilement
+            modalRef.current.addEventListener('wheel', allowScroll, {
+                passive: false,
             });
-        } else if (modalRef.current) {
-            // Animation de fermeture de la modal
-            gsap.to(modalRef.current, {
+        } else if (container_modal.current) {
+            // Animation de disparition quand la modal se ferme
+            gsap.to(container_modal.current, {
                 y: '150vh',
                 duration: 0.5,
                 ease: 'power2.in',
@@ -80,13 +79,21 @@ function CarousselContent({
                     toggleModal(); // Ferme la modal après l'animation
                 },
             });
-
-            // Nettoyer ScrollTrigger lorsque la modal se ferme
-            ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+            container_modal.current.removeEventListener('wheel', allowScroll);
         }
+
+        return () => {
+            if (container_modal.current) {
+                container_modal.current.removeEventListener(
+                    'wheel',
+                    allowScroll,
+                );
+            }
+        };
     }, [isOpen]);
 
     const handleCloseModal = () => {
+        document.getElementsByTagName('body')[0].style.overflow = 'auto';
         gsap.to(modalRef.current, {
             y: '150vh',
             duration: 0.5,
@@ -99,9 +106,11 @@ function CarousselContent({
             opacity: 0,
             duration: 0.5,
         });
-
-        // Supprimer les triggers pour le scroll dans la modal
-        ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
+    const handleClickOutsideModal = (e) => {
+        if (modalRef.current && !modalRef.current.contains(e.target)) {
+            handleCloseModal(); // Ferme la modal si le clic est à l'extérieur
+        }
     };
 
     return (
@@ -115,18 +124,20 @@ function CarousselContent({
                 <>
                     <div
                         className={styles.overlay}
-                        onClick={handleCloseModal}
-                        ref={overlayRef}
+                        ref={overlayRef} // Référence à l'overlay
                     />
-                    <div className={styles.containerModal}>
-                        <div className={styles.ref} ref={modalRef}>
+                    <div
+                        ref={container_modal}
+                        onClick={handleClickOutsideModal}
+                        className={styles.container_modal}>
+                        <Modal ref={modalRef} className={styles.ref}>
                             <span
                                 className={styles.cross}
                                 onClick={handleCloseModal}>
                                 X
                             </span>
-                            <Modal>{currentComponent}</Modal>
-                        </div>
+                            {currentComponent}
+                        </Modal>
                     </div>
                 </>
             )}
