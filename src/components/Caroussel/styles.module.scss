@@ -15,8 +15,11 @@
         align-items: center;
         padding-left: 100px;
         gap: 100px;
+        will-change: transform;
     }
     .caroussel_container {
+        will-change: transform;
+
         position: absolute;
         &:first-child {
             top: -20vh;
@@ -35,8 +38,8 @@
     .main_caroussel {
         display: flex;
         position: absolute;
-        left: -200px;
         z-index: 5;
+        left: -600px;
         justify-content: center;
         align-items: center;
         gap: 100px;
