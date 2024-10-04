@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useState, useRef } from 'react';
 import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger'; // Import ScrollTrigger
+
 import Caroussel from '../Caroussel';
 import styles from './styles.module.scss';
 import Modal from '../Modal';
@@ -64,7 +64,6 @@ function CarousselContent({
                 { opacity: 0 }, // Départ de l'animation (transparent)
                 { opacity: 1, duration: 0.5 }, // Devient opaque
             );
-
             // Ajouter un écouteur d'événements pour le défilement
             modalRef.current.addEventListener('wheel', allowScroll, {
                 passive: false,

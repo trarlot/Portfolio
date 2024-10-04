@@ -23,12 +23,6 @@ export default function Caroussel({
     let direction = -1;
     let animationFrameId;
     const isAnimatingRef = useRef(true); // Utilisation d'un ref pour gérer l'animation
-    const scrollTimeoutRef = useRef(null); // Référence pour le délai de défilement
-
-    const preventScroll = (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-    };
 
     useEffect(() => {
         // Initialisation de la position des divs
@@ -46,7 +40,6 @@ export default function Caroussel({
 
     useEffect(() => {
         gsap.registerPlugin(ScrollTrigger);
-
         const animation1 = gsap.to([firstDiv.current, secondDiv.current], {
             scrollTrigger: {
                 id: 'animation1',
@@ -87,32 +80,6 @@ export default function Caroussel({
             animation1.kill();
             animation2.kill();
             scrollTriggerAnim.kill();
-        };
-    }, []);
-
-    useEffect(() => {
-        const handleScroll = () => {
-            isAnimatingRef.current = false; // Mettre l'animation en pause
-            cancelAnimationFrame(animationFrameId); // Annuler l'animation en cours
-
-            // Réinitialiser le délai de défilement
-            if (scrollTimeoutRef.current) {
-                clearTimeout(scrollTimeoutRef.current);
-            }
-
-            isAnimatingRef.current = true; // Reprendre l'animation
-            requestAnimationFrame(animate); // Redémarrer l'animation
-        };
-
-        // Ajouter un écouteur d'événements pour le scroll
-        window.addEventListener('scroll', handleScroll);
-
-        return () => {
-            // Nettoyage des écouteurs d'événements lors du démontage
-            window.removeEventListener('scroll', handleScroll);
-            if (scrollTimeoutRef.current) {
-                clearTimeout(scrollTimeoutRef.current);
-            }
         };
     }, []);
 

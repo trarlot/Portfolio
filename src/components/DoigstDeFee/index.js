@@ -1,20 +1,150 @@
 import styles from './styles.module.scss';
 import Image from 'next/image';
-
+import { gsap } from 'gsap';
+import { forwardRef, useImperativeHandle, useRef, useEffect } from 'react';
 import { Saira_Condensed } from 'next/font/google';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import ddf from '@/../public/assets/bannerDDF.jpg';
 import ddf1 from '@/../public/assets/DDF1.jpg';
 import ddf2 from '@/../public/assets/DDF2.jpg';
 import ddf3 from '@/../public/assets/DDF3.jpg';
+import ddf4 from '@/../public/assets/DDF4.jpg';
+import stylesWrapper from '../../components/CarousselWrapper/styles.module.scss';
+
 const saira_init = Saira_Condensed({
     weight: ['800'],
     subsets: ['latin'],
 });
-export default function DoigtsDeFee() {
+
+const DoigtsDeFee = forwardRef((props, ref) => {
+    const bannerRef = useRef(null);
+    const doigtsRef = useRef(null);
+    const deRef = useRef(null);
+    const feeRef = useRef(null);
+    const subtitlesRef = useRef(null);
+    const dateRef = useRef(null);
+    const julyRef = useRef(null);
+    const rolesRef = useRef(null);
+    const devRef = useRef(null);
+    const techsRef = useRef(null);
+    const photo1Ref = useRef(null);
+    const photo2Ref = useRef(null);
+    const photo3Ref = useRef(null);
+    const photo4Ref = useRef(null);
+    const photosRef = useRef(null);
+    const reactRef = useRef(null);
+    const animationExecuted = useRef(false); // ref pour suivre l'état de l'animation
+
+    useEffect(() => {
+        if (!animationExecuted.current) {
+            gsap.registerPlugin(ScrollTrigger);
+
+            // Vérifie si l'animation a déjà été exécutée
+            gsap.fromTo(
+                [
+                    doigtsRef.current,
+                    deRef.current,
+                    feeRef.current,
+                    subtitlesRef.current,
+                ],
+                { yPercent: -110 },
+                {
+                    delay: 0.4,
+                    stagger: 0.1,
+                    yPercent: 0,
+                    duration: 0.3,
+                    ease: 'power1.out',
+                },
+            );
+            gsap.fromTo(
+                [
+                    dateRef.current,
+                    julyRef.current,
+                    rolesRef.current,
+                    devRef.current,
+                    techsRef.current,
+                    reactRef.current,
+                ],
+                { yPercent: 110 },
+                {
+                    delay: 0.8,
+                    stagger: 0.1,
+                    yPercent: 0,
+                    duration: 0.3,
+                    ease: 'power1.out',
+                },
+            );
+
+            gsap.fromTo(
+                bannerRef.current,
+                { xPercent: -110 },
+                {
+                    delay: 0.5,
+                    xPercent: 0,
+                    duration: 0.6,
+                    ease: 'power1.out',
+                },
+            );
+            setTimeout(() => {
+                configureScrollTrigger();
+            }, 500);
+            animationExecuted.current = true; // Marque l'animation comme exécutée
+        }
+    }, []);
+    // Expose la fonction pour configurer le ScrollTrigger
+
+    const configureScrollTrigger = () => {
+        console.log('configureScrollTrigger called'); // Ajoute cette ligne
+
+        // Ta logique pour configurer le ScrollTrigger ici
+        ScrollTrigger.create({
+            trigger: photosRef.current, // L'élément que vous voulez surveiller
+            start: 'top center+=25%', // Quand l'élément atteint le centre
+            end: 'top center+=25%',
+            scroller: `.${stylesWrapper.container_modal}`, // Sélectionnez la modal ou son contenu comme conteneur de défilement
+            onEnter: () => {
+                gsap.to(
+                    [
+                        photo1Ref.current,
+                        photo2Ref.current,
+                        photo3Ref.current,
+                        photo4Ref.current,
+                    ],
+                    {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.3,
+                        ease: 'power1.out',
+                        stagger: 0.2,
+                    },
+                );
+            },
+            onEnterBack: () => {
+                gsap.to(
+                    [
+                        photo1Ref.current,
+                        photo2Ref.current,
+                        photo3Ref.current,
+                        photo4Ref.current,
+                    ],
+                    {
+                        opacity: 0,
+                        y: 50,
+                        duration: 0.3,
+                        ease: 'power1.out',
+                        stagger: 0.2,
+                    },
+                );
+            },
+            markers: true, // Pour voir les marqueurs
+        });
+    };
+
     return (
         <div className={styles.work}>
             <div className={styles.header}>
                 <Image
+                    ref={bannerRef}
                     className={styles.banner}
                     src={ddf}
                     width={420}
@@ -24,67 +154,103 @@ export default function DoigtsDeFee() {
                 <div className={styles.text}>
                     <div className={styles.textHeader}>
                         <div className={styles.title}>
-                            <p className={saira_init.className}>DOIGTS</p>
-                            <p className={saira_init.className}>DE</p>
-                            <p className={saira_init.className}>FEE</p>
+                            <p className={saira_init.className}>
+                                <span ref={doigtsRef}>DOIGTS</span>
+                            </p>
+                            <p className={saira_init.className}>
+                                <span ref={deRef}>DE</span>
+                            </p>
+                            <p className={saira_init.className}>
+                                <span ref={feeRef}>FEE</span>
+                            </p>
                         </div>
-                        <p
-                            className={`${styles.subtitle}  ${saira_init.className}`}>
-                            The website of a nail artist
+                        <p>
+                            <span
+                                ref={subtitlesRef}
+                                className={`${styles.subtitle} ${saira_init.className}`}>
+                                The website of a nail artist
+                            </span>
                         </p>
                     </div>
                     <div className={styles.infos}>
                         <div className={styles.row}>
-                            <p>DATE</p>
-                            <p className={styles.light}>July 2024</p>
+                            <p>
+                                <span ref={dateRef}>DATE</span>
+                            </p>
+                            <p className={styles.light}>
+                                <span ref={julyRef}>July 2024</span>
+                            </p>
                         </div>
                         <div className={styles.row}>
-                            <p>ROLES</p>
-                            <p className={styles.light}>Developper, Designer</p>
+                            <p>
+                                <span ref={rolesRef}>ROLES</span>
+                            </p>
+                            <p className={styles.light}>
+                                <span ref={devRef}>Developer, Designer</span>
+                            </p>
                         </div>
                         <div className={styles.row}>
-                            <p>TECHS</p>
-                            <p className={styles.light}>React, Figma, GSAP</p>
+                            <p>
+                                <span ref={techsRef}>TECHS</span>
+                            </p>
+                            <p className={styles.light}>
+                                <span ref={reactRef}>React, Figma, GSAP</span>
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
-            <div className={styles.header}>
-                <Image
-                    className={styles.banner}
-                    src={ddf}
-                    width={420}
-                    height={700}
-                    alt="Doigts de fée home page"
-                />
-                <div className={styles.text}>
-                    <div className={styles.textHeader}>
-                        <div className={styles.title}>
-                            <p className={saira_init.className}>DOIGTS</p>
-                            <p className={saira_init.className}>DE</p>
-                            <p className={saira_init.className}>FEE</p>
-                        </div>
-                        <p
-                            className={`${styles.subtitle}  ${saira_init.className}`}>
-                            The website of a nail artist
-                        </p>
-                    </div>
-                    <div className={styles.infos}>
-                        <div className={styles.row}>
-                            <p>DATE</p>
-                            <p className={styles.light}>July 2024</p>
-                        </div>
-                        <div className={styles.row}>
-                            <p>ROLES</p>
-                            <p className={styles.light}>Developper, Designer</p>
-                        </div>
-                        <div className={styles.row}>
-                            <p>TECHS</p>
-                            <p className={styles.light}>React, Figma, GSAP</p>
-                        </div>
-                    </div>
+            <div className={styles.content}>
+                <div ref={photosRef} className={styles.photos}>
+                    <Image
+                        ref={photo1Ref}
+                        className={styles.photo}
+                        src={ddf1}
+                        width={1047}
+                        height={801}
+                        alt="Doigts de fée accueil"
+                    />
+                    <Image
+                        ref={photo2Ref}
+                        className={styles.photo}
+                        src={ddf2}
+                        width={1047}
+                        height={801}
+                        alt="Doigts de fée intro"
+                    />
+                    <Image
+                        ref={photo3Ref}
+                        className={styles.photo}
+                        src={ddf3}
+                        width={1047}
+                        height={801}
+                        alt="Doigts de fée salon "
+                    />
+                    <Image
+                        ref={photo4Ref}
+                        className={styles.photo}
+                        src={ddf4}
+                        width={1047}
+                        height={801}
+                        alt="Doigts de fée menu "
+                    />
+                </div>
+                <div className={styles.video}>
+                    <video
+                        loop
+                        muted
+                        poster="/assets/DDF1.jpg"
+                        width="320"
+                        height="240"
+                        controls
+                        preload="none">
+                        <source src="/assets/DDFVid.mp4" type="video/mp4" />
+                        Your browser does not support the video tag.
+                    </video>
                 </div>
             </div>
         </div>
     );
-}
+});
+
+export default DoigtsDeFee;
