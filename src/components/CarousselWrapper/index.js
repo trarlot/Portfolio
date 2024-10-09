@@ -1,8 +1,9 @@
 'use client';
 import { useEffect, useState, useRef } from 'react';
 import { gsap } from 'gsap';
-
+import ElectricCars from '../ElectricCars';
 import Caroussel from '../Caroussel';
+import Contact from '../Contact';
 import styles from './styles.module.scss';
 import Modal from '../Modal';
 import DoigtsDeFee from '../DoigstDeFee';
@@ -39,8 +40,11 @@ function CarousselContent({
                 case 'doigtsDeFee':
                     setCurrentComponent(<DoigtsDeFee />);
                     break;
-                case 'thisComponent':
-                    setCurrentComponent(<ThisComponent />);
+                case 'electricCars':
+                    setCurrentComponent(<ElectricCars />);
+                    break;
+                case 'contact':
+                    setCurrentComponent(<Contact />);
                     break;
                 default:
                     setCurrentComponent(null);

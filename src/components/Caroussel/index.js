@@ -1,7 +1,7 @@
 'use client';
 import styles from './styles.module.scss';
 import stylesMain from '../../app/page.module.css';
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState, useLayoutEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/all';
 import Card from './Card';
@@ -23,22 +23,43 @@ export default function Caroussel({
     let direction = -1;
     let animationFrameId;
     const isAnimatingRef = useRef(true); // Utilisation d'un ref pour gérer l'animation
+    const [renderTrigger, setRenderTrigger] = useState(false); // État pour forcer un re-render
 
-    useEffect(() => {
-        // Initialisation de la position des divs
-        if (secondDiv.current) {
-            secondDiv.current.style.left = firstDiv.current.offsetWidth + 'px';
+    // Fonction qui ajuste les positions de secondDiv et fourthDiv
+    const adjustDivPositions = () => {
+        if (firstDiv.current && secondDiv.current) {
+            const firstWidth = firstDiv.current.offsetWidth; // Largeur de firstDiv
+            secondDiv.current.style.left = `${firstWidth}px`; // Positionnement de secondDiv
         }
-        if (fourthDiv.current) {
-            fourthDiv.current.style.left = -thirdDiv.current.offsetWidth + 'px';
+        if (thirdDiv.current && fourthDiv.current) {
+            const thirdWidth = thirdDiv.current.offsetWidth; // Largeur de thirdDiv
+            fourthDiv.current.style.left = `${-thirdWidth}px`; // Positionnement de fourthDiv
         }
+    };
+
+    // Utilisation de ResizeObserver pour surveiller les changements de taille
+    useLayoutEffect(() => {
+        const resizeObserver = new ResizeObserver(() => {
+            adjustDivPositions(); // Ajustement lors du changement de taille
+        });
+
+        // Observer les divs qui doivent être surveillées
+        if (firstDiv.current) resizeObserver.observe(firstDiv.current);
+        if (thirdDiv.current) resizeObserver.observe(thirdDiv.current);
+
+        // Ajustement initial
+        adjustDivPositions();
+
+        return () => {
+            resizeObserver.disconnect(); // Déconnexion de l'observateur lors du nettoyage
+        };
+    }, []); // Pas de dépendances car les refs ne changent pas
+
+    useLayoutEffect(() => {
         document.querySelector(`.${stylesMain.main}`).style.height =
             slider.current.offsetWidth + 'px';
 
         requestAnimationFrame(animate);
-    }, []);
-
-    useEffect(() => {
         gsap.registerPlugin(ScrollTrigger);
         const animation1 = gsap.to([firstDiv.current, secondDiv.current], {
             scrollTrigger: {

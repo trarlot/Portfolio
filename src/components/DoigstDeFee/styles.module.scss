@@ -85,6 +85,7 @@
             .photo {
                 width: 45%;
                 flex: 1 1;
+                border-radius: 11px;
                 height: auto;
                 opacity: 0;
                 transform: translate(0, 50%);
@@ -92,6 +93,8 @@
         }
         .video {
             video {
+                opacity: 0;
+                transform: translate(0, 50%);
                 width: 100%;
                 height: auto;
             }

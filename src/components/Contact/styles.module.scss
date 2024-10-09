@@ -1,0 +1,122 @@
+.work {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    .header {
+        display: flex;
+        gap: 50px;
+        justify-content: space-between;
+        overflow: hidden;
+        .banner {
+            border-radius: 8px;
+            width: 50%;
+        }
+        .text {
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            .textHeader {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                height: 100%;
+                gap: 30px;
+                .title {
+                    overflow: hidden;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 20px;
+                    p {
+                        overflow: hidden;
+                        font-size: 110px;
+                        line-height: 85px;
+                        margin-top: -5px;
+                        span {
+                            display: block;
+                        }
+                    }
+                }
+                p {
+                    overflow: hidden;
+
+                    span {
+                        display: block;
+                    }
+                }
+                .subtitle {
+                    font-size: 30px;
+                    line-height: 30px;
+                    font-weight: 500;
+                }
+            }
+        }
+    }
+    .content {
+        display: flex;
+        justify-content: center;
+        align-items: end;
+        flex-direction: column;
+        gap: 100px;
+        .reseaux {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 100%;
+
+            .reseau {
+                display: block;
+                width: 100%;
+                opacity: 0;
+                font-family: 'Helvetica Neue';
+                font-weight: 200;
+                text-decoration: none;
+                box-sizing: border-box;
+                color: white;
+                font-size: 35px;
+                padding: 20px;
+                transition: 0.3s;
+                border-bottom: solid 1px white;
+                background-image: linear-gradient(
+                    to bottom,
+                    transparent 50%,
+                    white 50%
+                );
+                transform: translate(0, 100%);
+                background-size: 100% 200%;
+                background-position: 100% 0%;
+                &:hover {
+                    background-position: 100% 100%;
+                    color: black;
+                    border-radius: 11px;
+                    cursor: pointer;
+                }
+            }
+        }
+        .button {
+            display: flex;
+            justify-self: end;
+            justify-content: center;
+            text-decoration: none;
+            color: rgb(37, 37, 37);
+            opacity: 0;
+            transform: translate(0, 100%);
+            font-size: 35px;
+            padding: 30px 20px;
+            width: 400px;
+            transition: 0.3s;
+            border-radius: 11px;
+            background-image: linear-gradient(
+                white 50%,
+                rgba(255, 255, 255, 0.05) 50%
+            );
+            background-size: 100% 200%;
+            background-position: 100% 0%;
+            &:hover {
+                background-position: 100% 100%;
+                color: white;
+                cursor: pointer;
+            }
+        }
+    }
+}

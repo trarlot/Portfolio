@@ -10,13 +10,14 @@ import ddf2 from '@/../public/assets/DDF2.jpg';
 import ddf3 from '@/../public/assets/DDF3.jpg';
 import ddf4 from '@/../public/assets/DDF4.jpg';
 import stylesWrapper from '../../components/CarousselWrapper/styles.module.scss';
+import { useModalContext } from '@/context/modalContext';
 
 const saira_init = Saira_Condensed({
     weight: ['800'],
     subsets: ['latin'],
 });
 
-const DoigtsDeFee = forwardRef((props, ref) => {
+const DoigtsDeFee = () => {
     const bannerRef = useRef(null);
     const doigtsRef = useRef(null);
     const deRef = useRef(null);
@@ -33,13 +34,15 @@ const DoigtsDeFee = forwardRef((props, ref) => {
     const photo4Ref = useRef(null);
     const photosRef = useRef(null);
     const reactRef = useRef(null);
+    const videoRef = useRef(null);
+    const containerVideoRef = useRef(null);
     const animationExecuted = useRef(false); // ref pour suivre l'état de l'animation
 
     useEffect(() => {
         if (!animationExecuted.current) {
             gsap.registerPlugin(ScrollTrigger);
 
-            // Vérifie si l'animation a déjà été exécutée
+            // Animations de texte
             gsap.fromTo(
                 [
                     doigtsRef.current,
@@ -56,6 +59,7 @@ const DoigtsDeFee = forwardRef((props, ref) => {
                     ease: 'power1.out',
                 },
             );
+
             gsap.fromTo(
                 [
                     dateRef.current,
@@ -81,63 +85,104 @@ const DoigtsDeFee = forwardRef((props, ref) => {
                 {
                     delay: 0.5,
                     xPercent: 0,
-                    duration: 0.6,
+                    duration: 0.4,
                     ease: 'power1.out',
                 },
             );
+
+            // Configuration du ScrollTrigger après 500ms
             setTimeout(() => {
                 configureScrollTrigger();
             }, 500);
+
             animationExecuted.current = true; // Marque l'animation comme exécutée
         }
-    }, []);
+    }, []); // Ajoute isOpen dans les dépendances
     // Expose la fonction pour configurer le ScrollTrigger
 
     const configureScrollTrigger = () => {
-        console.log('configureScrollTrigger called'); // Ajoute cette ligne
-
-        // Ta logique pour configurer le ScrollTrigger ici
         ScrollTrigger.create({
-            trigger: photosRef.current, // L'élément que vous voulez surveiller
-            start: 'top center+=25%', // Quand l'élément atteint le centre
+            trigger: photosRef.current,
+            start: 'top center+=25%',
             end: 'top center+=25%',
-            scroller: `.${stylesWrapper.container_modal}`, // Sélectionnez la modal ou son contenu comme conteneur de défilement
+            scroller: `.${stylesWrapper.container_modal}`,
             onEnter: () => {
-                gsap.to(
-                    [
-                        photo1Ref.current,
-                        photo2Ref.current,
-                        photo3Ref.current,
-                        photo4Ref.current,
-                    ],
-                    {
-                        opacity: 1,
-                        y: 0,
-                        duration: 0.3,
-                        ease: 'power1.out',
-                        stagger: 0.2,
-                    },
-                );
+                if (
+                    photo1Ref.current &&
+                    photo2Ref.current &&
+                    photo3Ref.current &&
+                    photo4Ref.current
+                ) {
+                    gsap.to(
+                        [
+                            photo1Ref.current,
+                            photo2Ref.current,
+                            photo3Ref.current,
+                            photo4Ref.current,
+                        ],
+                        {
+                            opacity: 1,
+                            y: 0,
+                            duration: 0.5,
+                            ease: 'power1.out',
+                            stagger: 0.2,
+                        },
+                    );
+                }
             },
             onEnterBack: () => {
-                gsap.to(
-                    [
-                        photo1Ref.current,
-                        photo2Ref.current,
-                        photo3Ref.current,
-                        photo4Ref.current,
-                    ],
-                    {
+                if (
+                    photo1Ref.current &&
+                    photo2Ref.current &&
+                    photo3Ref.current &&
+                    photo4Ref.current
+                ) {
+                    gsap.to(
+                        [
+                            photo1Ref.current,
+                            photo2Ref.current,
+                            photo3Ref.current,
+                            photo4Ref.current,
+                        ],
+                        {
+                            opacity: 0,
+                            y: 50,
+                            duration: 0.3,
+                            ease: 'power1.out',
+                            stagger: 0.2,
+                        },
+                    );
+                }
+            },
+        });
+        ScrollTrigger.create({
+            trigger: containerVideoRef.current,
+            start: 'top center+=25%',
+            end: 'top center+=25%',
+            scroller: `.${stylesWrapper.container_modal}`,
+            onEnter: () => {
+                if (videoRef.current) {
+                    gsap.to(videoRef.current, {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.5,
+                        ease: 'power1.out',
+                    });
+                }
+            },
+            onEnterBack: () => {
+                if (videoRef.current) {
+                    gsap.to(videoRef.current, {
                         opacity: 0,
                         y: 50,
                         duration: 0.3,
                         ease: 'power1.out',
-                        stagger: 0.2,
-                    },
-                );
+                    });
+                }
             },
-            markers: true, // Pour voir les marqueurs
         });
+
+        ScrollTrigger.refresh(true);
     };
 
     return (
@@ -235,8 +280,9 @@ const DoigtsDeFee = forwardRef((props, ref) => {
                         alt="Doigts de fée menu "
                     />
                 </div>
-                <div className={styles.video}>
+                <div ref={containerVideoRef} className={styles.video}>
                     <video
+                        ref={videoRef}
                         loop
                         muted
                         poster="/assets/DDF1.jpg"
@@ -251,6 +297,6 @@ const DoigtsDeFee = forwardRef((props, ref) => {
             </div>
         </div>
     );
-});
+};
 
 export default DoigtsDeFee;
