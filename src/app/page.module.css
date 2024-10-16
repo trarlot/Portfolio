@@ -3,4 +3,9 @@
   justify-content: center;
   align-items: start;
   gap: 160px;
+  background-image: url('/assets/bg.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed !important;
+  background-size: cover !important;
 }

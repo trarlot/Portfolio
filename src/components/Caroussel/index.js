@@ -7,16 +7,14 @@ import { ScrollTrigger } from 'gsap/all';
 import Card from './Card';
 import { useModalContext } from '@/context/modalContext';
 
-export default function Caroussel({
-    randomizedAndFixedCards,
-    randomizedKeys1,
-    randomizedKeys2,
-}) {
+export default function Caroussel({ mainArray, firstArray, secondArray }) {
     const { isOpen, toggleModal } = useModalContext();
     const firstDiv = useRef(null);
     const secondDiv = useRef(null);
+    const secondDiv2 = useRef(null);
     const thirdDiv = useRef(null);
     const fourthDiv = useRef(null);
+    const fourthDiv2 = useRef(null);
     const container = useRef(null);
     const slider = useRef(null);
     let xPercent = 0;
@@ -30,10 +28,12 @@ export default function Caroussel({
         if (firstDiv.current && secondDiv.current) {
             const firstWidth = firstDiv.current.offsetWidth; // Largeur de firstDiv
             secondDiv.current.style.left = `${firstWidth}px`; // Positionnement de secondDiv
+            secondDiv2.current.style.left = `${-firstWidth}px`; // Positionnement de secondDiv
         }
         if (thirdDiv.current && fourthDiv.current) {
             const thirdWidth = thirdDiv.current.offsetWidth; // Largeur de thirdDiv
             fourthDiv.current.style.left = `${-thirdWidth}px`; // Positionnement de fourthDiv
+            fourthDiv2.current.style.left = `${thirdWidth}px`; // Positionnement de fourthDiv
         }
     };
 
@@ -61,38 +61,44 @@ export default function Caroussel({
 
         requestAnimationFrame(animate);
         gsap.registerPlugin(ScrollTrigger);
-        const animation1 = gsap.to([firstDiv.current, secondDiv.current], {
-            scrollTrigger: {
-                id: 'animation1',
-                trigger: `.${styles.container}`,
-                scrub: 0.25,
-                start: 0,
-                endTrigger: `.${stylesMain.main}`,
-                end: 'bottom bottom',
+        const animation1 = gsap.to(
+            [firstDiv.current, secondDiv.current, secondDiv2.current],
+            {
+                scrollTrigger: {
+                    id: 'animation1',
+                    trigger: `.${styles.container}`,
+                    scrub: 0.25,
+                    start: 0,
+                    endTrigger: `.${stylesMain.main}`,
+                    end: 'bottom bottom',
+                },
+                x: '-1000px',
             },
-            x: '-1000px',
-        });
+        );
 
-        const animation2 = gsap.to([thirdDiv.current, fourthDiv.current], {
-            scrollTrigger: {
-                id: 'animation2',
-                trigger: `.${styles.container}`,
-                scrub: 0.25,
-                start: 0,
-                endTrigger: `.${stylesMain.main}`,
-                end: 'bottom bottom',
+        const animation2 = gsap.to(
+            [thirdDiv.current, fourthDiv.current, fourthDiv2.current],
+            {
+                scrollTrigger: {
+                    id: 'animation2',
+                    trigger: `.${styles.container}`,
+                    scrub: 0.25,
+                    start: 0,
+                    endTrigger: `.${stylesMain.main}`,
+                    end: 'bottom bottom',
+                },
+                x: '-1000px',
             },
-            x: '-1000px',
-        });
+        );
 
         const scrollTriggerAnim = gsap.to(slider.current, {
-            xPercent: -50,
+            xPercent: -55,
             ease: 'none',
             scrollTrigger: {
                 id: 'scrollTriggerAnim',
                 trigger: `.${stylesMain.main}`,
                 start: 'top top',
-                scrub: 0.5,
+                scrub: 0.03,
                 end: 'bottom bottom',
             },
         });
@@ -114,10 +120,12 @@ export default function Caroussel({
             }
             gsap.set(firstDiv.current, { xPercent: xPercent });
             gsap.set(secondDiv.current, { xPercent: xPercent });
+            gsap.set(secondDiv2.current, { xPercent: xPercent });
             gsap.set(thirdDiv.current, { xPercent: -xPercent });
             gsap.set(fourthDiv.current, { xPercent: -xPercent });
+            gsap.set(fourthDiv2.current, { xPercent: -xPercent });
             animationFrameId = requestAnimationFrame(animate);
-            xPercent += 0.01 * direction;
+            xPercent += 0.03 * direction;
         }
     };
 
@@ -129,59 +137,91 @@ export default function Caroussel({
         <div ref={container} className={styles.container}>
             <div className={styles.caroussel_container}>
                 <div ref={firstDiv} className={styles.caroussel}>
-                    {randomizedKeys1.map((card, index) => (
+                    {firstArray.map((card, index) => (
                         <Card
-                            key={index}
                             imgUrl={card.imgUrl}
                             imgTitle={card.title}
+                            color={card.color}
+                            key={index}
+                            bg={card.bg}
                         />
                     ))}
                 </div>
                 <div ref={secondDiv} className={styles.caroussel}>
-                    {randomizedKeys1.map((card, index) => (
+                    {firstArray.map((card, index) => (
                         <Card
-                            key={index}
                             imgUrl={card.imgUrl}
                             imgTitle={card.title}
+                            color={card.color}
+                            key={index}
+                            bg={card.bg}
+                        />
+                    ))}
+                </div>
+                <div ref={secondDiv2} className={styles.caroussel}>
+                    {firstArray.map((card, index) => (
+                        <Card
+                            imgUrl={card.imgUrl}
+                            imgTitle={card.title}
+                            color={card.color}
+                            key={index}
+                            bg={card.bg}
                         />
                     ))}
                 </div>
             </div>
             <div ref={slider} className={styles.main_caroussel}>
-                {randomizedAndFixedCards.map((detail, index) =>
+                {mainArray.map((detail, index) =>
                     detail && detail.imgUrl ? (
                         <Card
                             key={index}
                             onClick={() => handleCardClick(detail)}
                             imgUrl={detail.imgUrl}
                             imgTitle={detail.title}
+                            color={detail.color}
                             hover={detail.hover}
+                            bg={detail.bg}
                         />
                     ) : (
                         <Card
                             key={index}
-                            imgTitle={detail.title}
+                            color={detail.color}
                             hover={detail.hover}
+                            imgUrl={detail.imgUrl}
+                            imgTitle={detail.title}
+                            bg={detail.bg}
                         />
                     ),
                 )}
             </div>
             <div className={styles.caroussel_container}>
                 <div ref={thirdDiv} className={styles.caroussel}>
-                    {randomizedKeys2.map((card, index) => (
+                    {secondArray.map((card, index) => (
                         <Card
-                            key={index}
                             imgUrl={card.imgUrl}
                             imgTitle={card.title}
+                            color={card.color}
+                            key={index}
                         />
                     ))}
                 </div>
                 <div ref={fourthDiv} className={styles.caroussel}>
-                    {randomizedKeys2.map((card, index) => (
+                    {secondArray.map((card, index) => (
                         <Card
-                            key={index}
                             imgUrl={card.imgUrl}
                             imgTitle={card.title}
+                            color={card.color}
+                            key={index}
+                        />
+                    ))}
+                </div>
+                <div ref={fourthDiv2} className={styles.caroussel}>
+                    {secondArray.map((card, index) => (
+                        <Card
+                            imgUrl={card.imgUrl}
+                            imgTitle={card.title}
+                            color={card.color}
+                            key={index}
                         />
                     ))}
                 </div>

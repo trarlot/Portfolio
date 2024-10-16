@@ -6,7 +6,7 @@
     bottom: 0;
     overflow: scroll;
     background-color: rgba(0, 0, 0, 0.7); // Ajuste l'opacité ici
-    z-index: 5; // Assurez-vous que l'overlay est au-dessus du contenu
+    z-index: 10; // Assurez-vous que l'overlay est au-dessus du contenu
     opacity: 0; // Départ transparent
 }
 .container_modal {
@@ -16,18 +16,21 @@
     overflow-y: auto;
     width: 100vw;
     height: 100vh;
-    z-index: 9;
+    z-index: 11;
     top: 0;
     .ref {
         max-width: 1000px;
         width: 100%;
         justify-self: center;
         background-color: #202020;
+        height: -moz-fit-content;
         height: fit-content;
-        z-index: 9; // Doit être plus élevé que l'overlay
+        z-index: 9;
+
         padding: 70px;
         box-sizing: border-box;
         margin: 70px auto;
+        /* box-shadow: -20px 20px 0 0 var(--shadow-color); */
         border-radius: 11px;
         .cross {
             width: 35px;

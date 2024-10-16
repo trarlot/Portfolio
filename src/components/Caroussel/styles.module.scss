@@ -16,7 +16,7 @@
         z-index: 5;
         justify-content: center;
         align-items: center;
-        padding-left: 100px;
+        padding-left: 80px;
         gap: 75px;
         will-change: transform;
     }
@@ -25,13 +25,13 @@
 
         position: absolute;
         &:first-child {
-            top: -20vh;
-            left: -100%;
+            top: -27vh;
+            left: 76%;
         }
 
         &:last-child {
-            bottom: 20vh;
-            left: -50%;
+            bottom: 19vh;
+            left: -40%;
         }
 
         #copy1 {
@@ -42,11 +42,10 @@
         display: flex;
         position: absolute;
         z-index: 5;
-        left: -600px;
         justify-content: center;
         align-items: center;
         gap: 75px;
         top: 50%;
-        transform: translate(0, -50%);
+        transform: translate(-7%, -50%);
     }
 }

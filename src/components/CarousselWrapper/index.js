@@ -8,17 +8,13 @@ import styles from './styles.module.scss';
 import Modal from '../Modal';
 import DoigtsDeFee from '../DoigstDeFee';
 import Lenis from 'lenis';
-import { useModalContext, ModalProvider } from '@/context/modalContext';
+import { useModalContext } from '@/context/modalContext';
 
 const allowScroll = (e) => {
     e.stopPropagation();
 };
 
-function CarousselContent({
-    randomizedKeys1,
-    randomizedKeys2,
-    randomizedAndFixedCards,
-}) {
+function CarousselContent({ firstArray, secondArray, mainArray }) {
     const { isOpen, selectedCard, toggleModal } = useModalContext();
     const [currentComponent, setCurrentComponent] = useState(null);
     const modalRef = useRef(null);
@@ -119,9 +115,9 @@ function CarousselContent({
     return (
         <>
             <Caroussel
-                randomizedKeys1={randomizedKeys1}
-                randomizedKeys2={randomizedKeys2}
-                randomizedAndFixedCards={randomizedAndFixedCards}
+                firstArray={firstArray}
+                secondArray={secondArray}
+                mainArray={mainArray}
             />
             {isOpen && (
                 <>
@@ -149,9 +145,5 @@ function CarousselContent({
 }
 
 export default function CarousselWrapper(props) {
-    return (
-        <ModalProvider>
-            <CarousselContent {...props} />
-        </ModalProvider>
-    );
+    return <CarousselContent {...props} />;
 }

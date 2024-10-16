@@ -1,7 +1,7 @@
 import styles from './styles.module.scss';
 import Image from 'next/image';
 import { gsap } from 'gsap';
-import { forwardRef, useImperativeHandle, useRef, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import { Saira_Condensed } from 'next/font/google';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import ddf from '@/../public/assets/bannerDDF.jpg';
@@ -10,7 +10,6 @@ import ddf2 from '@/../public/assets/DDF2.jpg';
 import ddf3 from '@/../public/assets/DDF3.jpg';
 import ddf4 from '@/../public/assets/DDF4.jpg';
 import stylesWrapper from '../../components/CarousselWrapper/styles.module.scss';
-import { useModalContext } from '@/context/modalContext';
 
 const saira_init = Saira_Condensed({
     weight: ['800'],
