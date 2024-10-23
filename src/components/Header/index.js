@@ -100,7 +100,7 @@ export default function Header() {
                     <div
                         onClick={() => handleCardClick(cardHeader)}
                         className={styles.button}>
-                        <p className={saira_init.className}>Contact</p>
+                        <p className={saira_init.className}>About</p>
                     </div>
                 </div>
                 <div

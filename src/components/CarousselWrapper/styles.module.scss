@@ -29,7 +29,7 @@
 
         padding: 70px;
         box-sizing: border-box;
-        margin: 70px auto;
+        margin: 70px 10px;
         /* box-shadow: -20px 20px 0 0 var(--shadow-color); */
         border-radius: 11px;
         .cross {
@@ -38,6 +38,7 @@
             background-color: white;
             position: absolute;
             right: 20px;
+            z-index: 9;
             top: 20px;
             border-radius: 50%;
             display: flex;
@@ -48,6 +49,22 @@
                 cursor: pointer;
                 box-shadow: 0 0 12px 0px white;
             }
+        }
+    }
+}
+@media screen and (max-width: 1050px) {
+    .container_modal {
+        .ref {
+            max-width: 600px;
+            overflow: hidden;
+            padding: 0;
+        }
+    }
+}
+@media screen and (max-width: 650px) {
+    .container_modal {
+        .ref {
+            max-width: 400px;
         }
     }
 }

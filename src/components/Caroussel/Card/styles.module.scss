@@ -85,6 +85,7 @@
             position: absolute;
             top: 50%;
             transition: 0.2s;
+            width: 35%;
             left: 50%;
             transform: translate(-50%, -50%);
             object-fit: cover;
@@ -95,11 +96,11 @@
             opacity: 0;
             transition: 0.3s;
             color: white;
-            font-size: 10vh;
+            font-size: 9vh;
             position: absolute;
             bottom: 0;
             left: 0;
-            line-height: 9vh;
+            line-height: 8vh;
             font-weight: 900;
             max-width: 70%;
             padding: 25px;
@@ -140,7 +141,7 @@
             height: auto;
         }
     }
-    &:nth-child(3) {
+    &:nth-child(4) {
         .hover {
             opacity: 1;
         }
@@ -148,7 +149,7 @@
         box-shadow: unset;
         background-color: unset;
     }
-    &:nth-child(12) {
+    &:nth-child(13) {
         .bg {
             transform: translateY(-70px);
         }
@@ -175,6 +176,33 @@
 
             .click {
                 opacity: 0;
+            }
+        }
+    }
+}
+@media screen and (max-height: 700px) {
+    .card_container {
+        transform: translate(15px, -15px);
+
+        .card {
+            box-shadow: -15px 15px 0 0 var(--shadow-color);
+        }
+        &::before {
+            width: 25px;
+            height: 25px;
+            left: -7px;
+        }
+    }
+}
+@media screen and (max-width: 500px) {
+    .card_container,
+    .main_card {
+        width: 32vh;
+        height: 40vh;
+        .card {
+            .hover {
+                font-size: 7.5vh;
+                line-height: 6.5vh;
             }
         }
     }

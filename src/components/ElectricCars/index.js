@@ -4,7 +4,10 @@ import { gsap } from 'gsap';
 import { useRef, useEffect } from 'react';
 import { Saira_Condensed } from 'next/font/google';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import eccImage from '@/../public/assets/electriccars5.jpg';
+
 import eec from '@/../public/assets/EEC.jpg';
+
 import stylesWrapper from '../../components/CarousselWrapper/styles.module.scss';
 
 const saira_init = Saira_Condensed({
@@ -96,60 +99,6 @@ const ElectricCars = () => {
     // Expose la fonction pour configurer le ScrollTrigger
 
     const configureScrollTrigger = () => {
-        ScrollTrigger.create({
-            trigger: photosRef.current,
-            start: 'top center+=25%',
-            end: 'top center+=25%',
-            scroller: `.${stylesWrapper.container_modal}`,
-            onEnter: () => {
-                if (
-                    video1Ref.current &&
-                    video2Ref.current &&
-                    video3Ref.current &&
-                    video4Ref.current
-                ) {
-                    gsap.to(
-                        [
-                            video1Ref.current,
-                            video2Ref.current,
-                            video3Ref.current,
-                            video4Ref.current,
-                        ],
-                        {
-                            opacity: 1,
-                            y: 0,
-                            duration: 0.5,
-                            ease: 'power1.out',
-                            stagger: 0.2,
-                        },
-                    );
-                }
-            },
-            onEnterBack: () => {
-                if (
-                    video1Ref.current &&
-                    video2Ref.current &&
-                    video3Ref.current &&
-                    video4Ref.current
-                ) {
-                    gsap.to(
-                        [
-                            video1Ref.current,
-                            video2Ref.current,
-                            video3Ref.current,
-                            video4Ref.current,
-                        ],
-                        {
-                            opacity: 0,
-                            y: 50,
-                            duration: 0.3,
-                            ease: 'power1.out',
-                            stagger: 0.2,
-                        },
-                    );
-                }
-            },
-        });
         ScrollTrigger.create({
             trigger: containerVideoRef.current,
             start: 'top center+=25%',
@@ -298,20 +247,6 @@ const ElectricCars = () => {
                             src="/assets/electriccars4.mp4"
                             type="video/mp4"
                         />
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
-                <div ref={containerVideoRef} className={styles.video}>
-                    <video
-                        ref={videoRef}
-                        loop
-                        muted
-                        poster="/assets/DDF1.jpg"
-                        width="320"
-                        height="240"
-                        controls
-                        preload="none">
-                        <source src="/assets/DDFVid.mp4" type="video/mp4" />
                         Your browser does not support the video tag.
                     </video>
                 </div>

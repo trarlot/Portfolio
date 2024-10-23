@@ -23,6 +23,7 @@ const Contact = () => {
     const linkedinRef = useRef(null);
     const gitRef = useRef(null);
     const buttonRef = useRef(null);
+    const titleRef = useRef(null);
     const animationExecuted = useRef(false); // ref pour suivre l'état de l'animation
 
     useEffect(() => {
@@ -46,17 +47,29 @@ const Contact = () => {
                     ease: 'power1.out',
                 },
             );
-
-            gsap.fromTo(
-                bannerRef.current,
-                { xPercent: -110 },
-                {
-                    delay: 0.5,
-                    xPercent: 0,
-                    duration: 0.4,
-                    ease: 'power1.out',
-                },
-            );
+            if (window.matchMedia('(min-width: 1050px)').matches) {
+                gsap.fromTo(
+                    bannerRef.current,
+                    { xPercent: -110 },
+                    {
+                        delay: 0.5,
+                        xPercent: 0,
+                        duration: 0.4,
+                        ease: 'power1.out',
+                    },
+                );
+            } else {
+                gsap.fromTo(
+                    bannerRef.current,
+                    { yPercent: 40 },
+                    {
+                        delay: 0.2,
+                        yPercent: 0,
+                        duration: 0.5,
+                        ease: 'power1.out',
+                    },
+                );
+            }
 
             // Configuration du ScrollTrigger après 500ms
             setTimeout(() => {
@@ -68,6 +81,17 @@ const Contact = () => {
     }, []);
 
     const configureScrollTrigger = () => {
+        // if (window.matchMedia('(max-width: 1050px)').matches) {
+        //     ScrollTrigger.create({
+        //         trigger: `.${styles.text}`,
+        //         start: 'center center',
+        //         scroller: `.${stylesWrapper.container_modal}`,
+        //         scrub: true,
+        //         markers: true,
+        //         animation: gsap.to(`.${styles.textHeader}`, { yPercent: -15 }),
+        //     });
+        // }
+
         ScrollTrigger.create({
             trigger: contentRef.current,
             start: 'top center+=25%',
@@ -141,8 +165,8 @@ const Contact = () => {
 
         ScrollTrigger.create({
             trigger: contentRef.current,
-            start: 'bottom bottom-=50px',
-            end: 'bottom bottom-=50px',
+            start: 'bottom bottom',
+            end: 'bottom bottom',
             scroller: `.${stylesWrapper.container_modal}`,
             onEnter: () => {
                 if (buttonRef.current) {
@@ -194,7 +218,7 @@ const Contact = () => {
                 />
                 <div className={styles.text}>
                     <div className={styles.textHeader}>
-                        <div className={styles.title}>
+                        <div ref={titleRef} className={styles.title}>
                             <p className={saira_init.className}>
                                 <span ref={letsRef}>LET'S</span>
                             </p>

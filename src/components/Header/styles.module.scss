@@ -118,3 +118,10 @@
         }
     }
 }
+@media screen and (max-width: 650px) {
+    .header {
+        flex-direction: column-reverse;
+        align-items: center;
+        height: 100vh;
+    }
+}

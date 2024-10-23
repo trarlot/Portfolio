@@ -103,7 +103,8 @@
             transform: translate(0, 100%);
             font-size: 35px;
             padding: 30px 20px;
-            width: 400px;
+            width: 100%;
+            max-width: 400px;
             transition: 0.3s;
             border-radius: 11px;
             background-image: linear-gradient(
@@ -116,6 +117,92 @@
                 background-position: 100% 100%;
                 color: white;
                 cursor: pointer;
+            }
+        }
+    }
+}
+@media screen and (max-width: 1050px) {
+    .work {
+        .header {
+            flex-direction: column;
+            position: relative;
+            height: 800px;
+            &:after {
+                position: absolute;
+                content: '';
+                height: 100%;
+                width: 100%;
+                top: 0;
+                left: 0;
+                background: linear-gradient(
+                    to bottom,
+                    rgba(255, 0, 0, 0) 40%,
+                    #202020 75%
+                );
+            }
+            .banner {
+                position: absolute;
+                width: 100%;
+                height: auto;
+                top: -30%;
+            }
+            .text {
+                padding: 0 20px;
+                position: absolute;
+                bottom: 0;
+                z-index: 1;
+                text-align: center;
+                .textHeader {
+                    justify-content: flex-end;
+                    gap: 75px;
+                }
+            }
+        }
+        .content {
+            padding: 50px;
+            align-items: center;
+        }
+    }
+}
+@media screen and (max-width: 650px) {
+    .work {
+        .header {
+            height: 575px;
+
+            .banner {
+                top: -30%;
+            }
+            .text {
+                padding: 0 20px;
+                .textHeader {
+                    justify-content: flex-end;
+                    gap: 50px;
+                    .title {
+                        p {
+                            font-size: 80px;
+                            line-height: 65px;
+                        }
+                    }
+                    .subtitle {
+                        font-size: 25px;
+                        line-height: 25px;
+                    }
+                }
+            }
+        }
+        .content {
+            padding: 20px 20px 50px 20px;
+            gap: 50px;
+            .reseaux {
+                .reseau {
+                    font-size: 30px;
+                }
+            }
+
+            .button {
+                font-size: 25px;
+                padding: 30px 0;
+                max-width: 325px;
             }
         }
     }

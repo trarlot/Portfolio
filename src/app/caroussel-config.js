@@ -78,6 +78,12 @@ export const cardMiddle = [
         imgTitle: '',
     },
     {
+        color: 'rgb(55, 55, 55)',
+        imgUrl: '',
+
+        imgTitle: '',
+    },
+    {
         color: 'rgb(0, 0, 0)',
         hover: 'SCROLL DOWN.',
     },
@@ -137,9 +143,15 @@ export const cardMiddle = [
     {
         color: 'rgb(0, 0, 0)',
         id: 'contact',
-        hover: 'CONTACT ME',
+        hover: 'ABOUT ME',
         imgUrl: '/assets/ClickIcon.png',
         bg: '/assets/tristan.jpg',
+
+        imgTitle: '',
+    },
+    {
+        color: 'rgb(55, 55, 55)',
+        imgUrl: '',
 
         imgTitle: '',
     },

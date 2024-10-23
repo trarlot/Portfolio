@@ -61,38 +61,32 @@ export default function Caroussel({ mainArray, firstArray, secondArray }) {
 
         requestAnimationFrame(animate);
         gsap.registerPlugin(ScrollTrigger);
-        const animation1 = gsap.to(
-            [firstDiv.current, secondDiv.current, secondDiv2.current],
-            {
-                scrollTrigger: {
-                    id: 'animation1',
-                    trigger: `.${styles.container}`,
-                    scrub: 0.25,
-                    start: 0,
-                    endTrigger: `.${stylesMain.main}`,
-                    end: 'bottom bottom',
-                },
-                x: '-1000px',
+        gsap.to([firstDiv.current, secondDiv.current, secondDiv2.current], {
+            scrollTrigger: {
+                id: 'animation1',
+                trigger: `.${styles.container}`,
+                scrub: 0.25,
+                start: 0,
+                endTrigger: `.${stylesMain.main}`,
+                end: 'bottom bottom',
             },
-        );
+            x: '-1000px',
+        });
 
-        const animation2 = gsap.to(
-            [thirdDiv.current, fourthDiv.current, fourthDiv2.current],
-            {
-                scrollTrigger: {
-                    id: 'animation2',
-                    trigger: `.${styles.container}`,
-                    scrub: 0.25,
-                    start: 0,
-                    endTrigger: `.${stylesMain.main}`,
-                    end: 'bottom bottom',
-                },
-                x: '-1000px',
+        gsap.to([thirdDiv.current, fourthDiv.current, fourthDiv2.current], {
+            scrollTrigger: {
+                id: 'animation2',
+                trigger: `.${styles.container}`,
+                scrub: 0.25,
+                start: 0,
+                endTrigger: `.${stylesMain.main}`,
+                end: 'bottom bottom',
             },
-        );
+            x: '-1000px',
+        });
 
-        const scrollTriggerAnim = gsap.to(slider.current, {
-            xPercent: -55,
+        gsap.to(slider.current, {
+            xPercent: -57,
             ease: 'none',
             scrollTrigger: {
                 id: 'scrollTriggerAnim',
@@ -102,12 +96,6 @@ export default function Caroussel({ mainArray, firstArray, secondArray }) {
                 end: 'bottom bottom',
             },
         });
-
-        return () => {
-            animation1.kill();
-            animation2.kill();
-            scrollTriggerAnim.kill();
-        };
     }, []);
 
     const animate = () => {
