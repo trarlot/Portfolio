@@ -1,17 +1,52 @@
+'use client';
 import CarousselWrapper from '@/components/CarousselWrapper';
-import { cardTop, cardBottom, cardMiddle } from './caroussel-config';
+import {
+    cardTop,
+    cardBottom,
+    cardMiddle,
+    cardPreloader,
+} from './caroussel-config';
 import styles from './page.module.css';
+import stylesCard from '../components/Caroussel/Card/styles.module.scss';
+import { gsap } from 'gsap';
+import { AnimatePresence } from 'framer-motion';
+import Preloader from '../components/Preloader/index';
+import { useState, useEffect } from 'react';
 
-// Fonction pour randomiser les clés d'un objet
+export default function Home() {
+    const [isLoading, setIsLoading] = useState(true);
 
-export default async function Home() {
+    useEffect(() => {
+        gsap.fromTo(
+            `#${stylesCard.welcome}`,
+            {
+                yPercent: 5, // Point de départ
+                opacity: 0,
+            },
+            {
+                yPercent: 0, // Point d'arrivée
+                opacity: 1,
+                duration: 0.5,
+            },
+        );
+        setTimeout(() => {
+            setIsLoading(false);
+            document.body.style.cursor = 'default';
+            window.scrollTo(0, 0);
+        }, 2500);
+    }, []);
+
     // Randomiser les cartes
     const firstArray = cardTop;
     const secondArray = cardBottom;
     const mainArray = cardMiddle;
+    const preloaderCard = cardPreloader;
 
     return (
         <main className={styles.main}>
+            <AnimatePresence mode="wait">
+                {isLoading && <Preloader preloaderCard={preloaderCard} />}
+            </AnimatePresence>
             <CarousselWrapper
                 firstArray={firstArray}
                 secondArray={secondArray}

@@ -1,6 +1,8 @@
 import React from 'react';
 import Image from 'next/image';
 import styles from './styles.module.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import { Saira_Condensed } from 'next/font/google';
 
 const saira_init = Saira_Condensed({
@@ -79,6 +81,7 @@ export default function Card({ hover, color, onClick, imgUrl, imgTitle, bg }) {
                         '--shadow-color': colorRgba,
                     }}
                     className={styles.main_card}
+                    id={hover == 'WELCOME' ? styles.welcome : ''}
                     onClick={onClick}>
                     <div className={styles.card_container}>
                         <div className={styles.card}>
@@ -104,11 +107,20 @@ export default function Card({ hover, color, onClick, imgUrl, imgTitle, bg }) {
                             ) : (
                                 ''
                             )}
-
-                            <p
-                                className={`${styles.hover}  ${saira_init.className}`}>
-                                {hover}
-                            </p>
+                            <div className={styles.containerHover}>
+                                <p
+                                    className={`${styles.hover}  ${saira_init.className}`}>
+                                    {hover}
+                                </p>
+                                {hover == 'WELCOME' && (
+                                    <div className={styles.progress_container}>
+                                        <div
+                                            className={
+                                                styles.progress_bar
+                                            }></div>
+                                    </div>
+                                )}
+                            </div>
                         </div>
                     </div>
                 </div>

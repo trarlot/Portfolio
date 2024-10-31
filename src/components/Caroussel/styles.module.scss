@@ -76,6 +76,17 @@
         .main_caroussel {
             transform: translate(-18%, -50%);
         }
+        .caroussel_container {
+            &:first-child {
+                top: -27vh;
+                left: 76%;
+            }
+
+            &:last-child {
+                bottom: 19vh;
+                left: -150%;
+            }
+        }
     }
 }
 @media screen and (max-width: 500px) {

@@ -4,7 +4,7 @@ import { gsap } from 'gsap';
 import { useRef, useEffect } from 'react';
 import { Saira_Condensed } from 'next/font/google';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import ddf from '@/../public/assets/bannerDDF.jpg';
+import ddf from '@/../public/assets/doigtsdefee.jpg';
 import ddf1 from '@/../public/assets/DDF1.jpg';
 import ddf2 from '@/../public/assets/DDF2.jpg';
 import ddf3 from '@/../public/assets/DDF3.jpg';
@@ -31,7 +31,6 @@ const DoigtsDeFee = () => {
     const photo2Ref = useRef(null);
     const photo3Ref = useRef(null);
     const photo4Ref = useRef(null);
-    const photosRef = useRef(null);
     const reactRef = useRef(null);
     const videoRef = useRef(null);
     const containerVideoRef = useRef(null);
@@ -40,7 +39,29 @@ const DoigtsDeFee = () => {
     useEffect(() => {
         if (!animationExecuted.current) {
             gsap.registerPlugin(ScrollTrigger);
-
+            if (window.matchMedia('(min-width: 1050px)').matches) {
+                gsap.fromTo(
+                    bannerRef.current,
+                    { xPercent: -110 },
+                    {
+                        delay: 0.5,
+                        xPercent: 0,
+                        duration: 0.4,
+                        ease: 'power1.out',
+                    },
+                );
+            } else {
+                gsap.fromTo(
+                    bannerRef.current,
+                    { yPercent: 20 },
+                    {
+                        delay: 0.2,
+                        yPercent: 0,
+                        duration: 0.5,
+                        ease: 'power1.out',
+                    },
+                );
+            }
             // Animations de texte
             gsap.fromTo(
                 [
@@ -78,17 +99,6 @@ const DoigtsDeFee = () => {
                 },
             );
 
-            gsap.fromTo(
-                bannerRef.current,
-                { xPercent: -110 },
-                {
-                    delay: 0.5,
-                    xPercent: 0,
-                    duration: 0.4,
-                    ease: 'power1.out',
-                },
-            );
-
             // Configuration du ScrollTrigger après 500ms
             setTimeout(() => {
                 configureScrollTrigger();
@@ -101,24 +111,15 @@ const DoigtsDeFee = () => {
 
     const configureScrollTrigger = () => {
         ScrollTrigger.create({
-            trigger: photosRef.current,
-            start: 'top center+=25%',
-            end: 'top center+=25%',
+            trigger: photo1Ref.current,
+            start: 'top bottom-=10%',
+            end: 'top bottom-=10%',
             scroller: `.${stylesWrapper.container_modal}`,
             onEnter: () => {
-                if (
-                    photo1Ref.current &&
-                    photo2Ref.current &&
-                    photo3Ref.current &&
-                    photo4Ref.current
-                ) {
+                if (photo1Ref.current) {
                     gsap.to(
-                        [
-                            photo1Ref.current,
-                            photo2Ref.current,
-                            photo3Ref.current,
-                            photo4Ref.current,
-                        ],
+                        photo1Ref.current,
+
                         {
                             opacity: 1,
                             y: 0,
@@ -130,34 +131,108 @@ const DoigtsDeFee = () => {
                 }
             },
             onEnterBack: () => {
-                if (
-                    photo1Ref.current &&
-                    photo2Ref.current &&
-                    photo3Ref.current &&
-                    photo4Ref.current
-                ) {
+                if (photo1Ref.current) {
+                    gsap.to(photo1Ref.current, {
+                        opacity: 0,
+                        y: 50,
+                        duration: 0.3,
+                        ease: 'power1.out',
+                        stagger: 0.2,
+                    });
+                }
+            },
+        });
+        ScrollTrigger.create({
+            trigger: photo2Ref.current,
+            start: 'top bottom-=10%',
+            end: 'top bottom-=10%',
+            scroller: `.${stylesWrapper.container_modal}`,
+
+            onEnter: () => {
+                if (photo2Ref.current) {
                     gsap.to(
-                        [
-                            photo1Ref.current,
-                            photo2Ref.current,
-                            photo3Ref.current,
-                            photo4Ref.current,
-                        ],
+                        photo2Ref.current,
+
                         {
-                            opacity: 0,
-                            y: 50,
-                            duration: 0.3,
+                            opacity: 1,
+                            y: 0,
+                            duration: 0.5,
                             ease: 'power1.out',
                             stagger: 0.2,
                         },
                     );
                 }
             },
+            onEnterBack: () => {
+                if (photo2Ref.current) {
+                    gsap.to(photo2Ref.current, {
+                        opacity: 0,
+                        y: 50,
+                        duration: 0.3,
+                        ease: 'power1.out',
+                        stagger: 0.2,
+                    });
+                }
+            },
+        });
+        ScrollTrigger.create({
+            trigger: photo3Ref.current,
+            start: 'top bottom-=10%',
+            end: 'top bottom-=10%',
+
+            scroller: `.${stylesWrapper.container_modal}`,
+            onEnter: () => {
+                if (photo3Ref.current) {
+                    gsap.to(photo3Ref.current, {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.5,
+                        ease: 'power1.out',
+                    });
+                }
+            },
+            onEnterBack: () => {
+                if (photo3Ref.current) {
+                    gsap.to(photo3Ref.current, {
+                        opacity: 0,
+                        y: 50,
+                        duration: 0.3,
+                        ease: 'power1.out',
+                    });
+                }
+            },
+        });
+        ScrollTrigger.create({
+            trigger: photo4Ref.current,
+            start: 'top bottom-=10%',
+            end: 'top bottom-=10%',
+            scroller: `.${stylesWrapper.container_modal}`,
+
+            onEnter: () => {
+                if (photo4Ref.current) {
+                    gsap.to(photo4Ref.current, {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.5,
+                        ease: 'power1.out',
+                    });
+                }
+            },
+            onEnterBack: () => {
+                if (photo4Ref.current) {
+                    gsap.to(photo4Ref.current, {
+                        opacity: 0,
+                        y: 50,
+                        duration: 0.3,
+                        ease: 'power1.out',
+                    });
+                }
+            },
         });
         ScrollTrigger.create({
             trigger: containerVideoRef.current,
-            start: 'top center+=25%',
-            end: 'top center+=25%',
+            start: 'top bottom-=10%',
+            end: 'top bottom-=10%',
             scroller: `.${stylesWrapper.container_modal}`,
             onEnter: () => {
                 if (videoRef.current) {
@@ -245,7 +320,7 @@ const DoigtsDeFee = () => {
                 </div>
             </div>
             <div className={styles.content}>
-                <div ref={photosRef} className={styles.photos}>
+                <div className={styles.photos}>
                     <Image
                         ref={photo1Ref}
                         className={styles.photo}

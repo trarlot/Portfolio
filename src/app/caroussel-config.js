@@ -1,3 +1,8 @@
+export const cardPreloader = {
+    color: 'rgb(0, 0, 0)',
+    hover: 'WELCOME',
+};
+
 export const cardHeader = {
     id: 'contact',
 };
@@ -85,7 +90,7 @@ export const cardMiddle = [
     },
     {
         color: 'rgb(0, 0, 0)',
-        hover: 'SCROLL DOWN.',
+        hover: 'SCROLL DOWN. ',
     },
     {
         color: 'rgb(55, 55, 55)',

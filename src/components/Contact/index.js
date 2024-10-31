@@ -87,7 +87,6 @@ const Contact = () => {
         //         start: 'center center',
         //         scroller: `.${stylesWrapper.container_modal}`,
         //         scrub: true,
-        //         markers: true,
         //         animation: gsap.to(`.${styles.textHeader}`, { yPercent: -15 }),
         //     });
         // }
@@ -234,7 +233,10 @@ const Contact = () => {
                                 ref={subtitlesRef}
                                 className={`${styles.subtitle} ${saira_init.className}`}>
                                 I’m a Front-end developer based in Paris, focus
-                                on web design and creative website.{' '}
+                                on web design and creative website. I help
+                                agencies, startups and designers by providing
+                                advanced animation and creativity in web
+                                development.{' '}
                             </span>
                         </p>
                     </div>

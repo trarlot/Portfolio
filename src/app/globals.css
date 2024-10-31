@@ -2,11 +2,11 @@ html,
 body {
   padding: 0;
   margin: 0;
-  background-color: black;
+  background-color: #141516;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
     Ubuntu, Cantarell, 'Fira Sans', 'Saira Condensed', 'Droid Sans',
     'Helvetica Neue', sans-serif;
-  background-color: black;
+  cursor: wait;
 }
 p {
   margin: 0;

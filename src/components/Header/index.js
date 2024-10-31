@@ -15,12 +15,30 @@ export default function Header() {
     const { isOpen, toggleModal } = useModalContext();
     const ddfRef = useRef(null);
     const eccRef = useRef(null);
+    const animRef = useRef(null);
     const [isAnimating, setIsAnimating] = useState(false); // État pour suivre l'animation
+
+    const handleMenu = (e) => {
+        e.preventDefault();
+        gsap.fromTo(
+            animRef.current,
+
+            { y: '130vh' },
+            {
+                y: 0,
+                duration: 0.5,
+                ease: [0.76, 0, 0.24, 1],
+            },
+        );
+        setTimeout(() => {
+            document.location.href = '/';
+        }, 500);
+    };
 
     const handleClick = () => {
         if (!isAnimating) {
             gsap.to([ddfRef.current, eccRef.current], {
-                width: 100,
+                width: 150,
                 height: 50,
                 marginTop: -25,
                 marginLeft: -50,
@@ -86,34 +104,42 @@ export default function Header() {
     }, [isAnimating]);
 
     return (
-        <div className={styles.header}>
-            <a href="/" className={`${styles.home} ${saira_init.className}`}>
-                © Tristan Arlot
-            </a>
-            <div className={styles.nav}>
-                <div className={styles.duo}>
-                    <div onClick={handleClick} className={styles.button}>
-                        <p id={styles.works} className={saira_init.className}>
-                            Works
-                        </p>
+        <div className={styles.containerHeader}>
+            <div ref={animRef} className={styles.anim}></div>
+            <div className={styles.header}>
+                <a
+                    href="/"
+                    onClick={handleMenu}
+                    className={`${styles.home} ${saira_init.className}`}>
+                    © Tristan Arlot
+                </a>
+                <div className={styles.nav}>
+                    <div className={styles.duo}>
+                        <div onClick={handleClick} className={styles.button}>
+                            <p
+                                id={styles.works}
+                                className={saira_init.className}>
+                                Works
+                            </p>
+                        </div>
+                        <div
+                            onClick={() => handleCardClick(cardHeader)}
+                            className={styles.button}>
+                            <p className={saira_init.className}>About</p>
+                        </div>
                     </div>
                     <div
-                        onClick={() => handleCardClick(cardHeader)}
-                        className={styles.button}>
-                        <p className={saira_init.className}>About</p>
+                        onClick={() => handleCardClick(cardDDF)}
+                        ref={ddfRef}
+                        className={`${styles.button2} ${saira_init.className}`}>
+                        Doigts de fée
                     </div>
-                </div>
-                <div
-                    onClick={() => handleCardClick(cardDDF)}
-                    ref={ddfRef}
-                    className={`${styles.button2} ${saira_init.className}`}>
-                    Doigts de fée
-                </div>
-                <div
-                    onClick={() => handleCardClick(cardECC)}
-                    ref={eccRef}
-                    className={`${styles.button2} ${saira_init.className}`}>
-                    Electric cars
+                    <div
+                        onClick={() => handleCardClick(cardECC)}
+                        ref={eccRef}
+                        className={`${styles.button2} ${saira_init.className}`}>
+                        Electric cars
+                    </div>
                 </div>
             </div>
         </div>

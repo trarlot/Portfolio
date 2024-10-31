@@ -23,7 +23,7 @@ export default function Caroussel({ mainArray, firstArray, secondArray }) {
     const isAnimatingRef = useRef(true); // Utilisation d'un ref pour gérer l'animation
     const [renderTrigger, setRenderTrigger] = useState(false); // État pour forcer un re-render
 
-    // Fonction qui ajuste les positions de secondDiv et fourthDiv
+    // Fonction qui ajoute une un caroussel devant et derriere le caroussel original
     const adjustDivPositions = () => {
         if (firstDiv.current && secondDiv.current) {
             const firstWidth = firstDiv.current.offsetWidth; // Largeur de firstDiv

@@ -45,7 +45,7 @@
                     }
                 }
                 .subtitle {
-                    font-size: 30px;
+                    font-size: 25px;
                     line-height: 30px;
                     font-weight: 500;
                 }
@@ -126,7 +126,7 @@
         .header {
             flex-direction: column;
             position: relative;
-            height: 800px;
+            height: 900px;
             &:after {
                 position: absolute;
                 content: '';
@@ -179,12 +179,12 @@
                     gap: 50px;
                     .title {
                         p {
-                            font-size: 80px;
-                            line-height: 65px;
+                            font-size: 70px;
+                            line-height: 55px;
                         }
                     }
                     .subtitle {
-                        font-size: 25px;
+                        font-size: 22px;
                         line-height: 25px;
                     }
                 }
