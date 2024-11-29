@@ -56,46 +56,52 @@ export default function Caroussel({ mainArray, firstArray, secondArray }) {
     }, []); // Pas de dépendances car les refs ne changent pas
 
     useLayoutEffect(() => {
-        document.querySelector(`.${stylesMain.main}`).style.height =
-            slider.current.offsetWidth + 'px';
+        document.body.style.overflow = 'hidden'; // Ajout de overflow hidden sur le body
 
-        requestAnimationFrame(animate);
-        gsap.registerPlugin(ScrollTrigger);
-        gsap.to([firstDiv.current, secondDiv.current, secondDiv2.current], {
-            scrollTrigger: {
-                id: 'animation1',
-                trigger: `.${styles.container}`,
-                scrub: 0.25,
-                start: 0,
-                endTrigger: `.${stylesMain.main}`,
-                end: 'bottom bottom',
-            },
-            x: '-1000px',
-        });
+        setTimeout(() => {
+            // Ajout d'un setTimeout de 2500ms
+            document.body.style.overflow = 'auto';
+            document.querySelector(`.${stylesMain.main}`).style.height =
+                slider.current.offsetWidth + 'px';
 
-        gsap.to([thirdDiv.current, fourthDiv.current, fourthDiv2.current], {
-            scrollTrigger: {
-                id: 'animation2',
-                trigger: `.${styles.container}`,
-                scrub: 0.25,
-                start: 0,
-                endTrigger: `.${stylesMain.main}`,
-                end: 'bottom bottom',
-            },
-            x: '-1000px',
-        });
+            requestAnimationFrame(animate);
+            gsap.registerPlugin(ScrollTrigger);
+            gsap.to([firstDiv.current, secondDiv.current, secondDiv2.current], {
+                scrollTrigger: {
+                    id: 'animation1',
+                    trigger: `.${styles.container}`,
+                    scrub: 0.25,
+                    start: 0,
+                    endTrigger: `.${stylesMain.main}`,
+                    end: 'bottom bottom',
+                },
+                x: '-1000px',
+            });
 
-        gsap.to(slider.current, {
-            xPercent: -57,
-            ease: 'none',
-            scrollTrigger: {
-                id: 'scrollTriggerAnim',
-                trigger: `.${stylesMain.main}`,
-                start: 'top top',
-                scrub: 0.03,
-                end: 'bottom bottom',
-            },
-        });
+            gsap.to([thirdDiv.current, fourthDiv.current, fourthDiv2.current], {
+                scrollTrigger: {
+                    id: 'animation2',
+                    trigger: `.${styles.container}`,
+                    scrub: 0.25,
+                    start: 0,
+                    endTrigger: `.${stylesMain.main}`,
+                    end: 'bottom bottom',
+                },
+                x: '-1000px',
+            });
+
+            gsap.to(slider.current, {
+                xPercent: -57,
+                ease: 'none',
+                scrollTrigger: {
+                    id: 'scrollTriggerAnim',
+                    trigger: `.${stylesMain.main}`,
+                    start: 'top top',
+                    scrub: 0.03,
+                    end: 'bottom bottom',
+                },
+            });
+        }, 2500); // Délai de 2500ms avant d'activer le ScrollTrigger
     }, []);
 
     const animate = () => {
@@ -128,7 +134,7 @@ export default function Caroussel({ mainArray, firstArray, secondArray }) {
                     {firstArray.map((card, index) => (
                         <Card
                             imgUrl={card.imgUrl}
-                            imgTitle={card.title}
+                            imgTitle={card.imgTitle}
                             color={card.color}
                             key={index}
                             bg={card.bg}
@@ -139,7 +145,7 @@ export default function Caroussel({ mainArray, firstArray, secondArray }) {
                     {firstArray.map((card, index) => (
                         <Card
                             imgUrl={card.imgUrl}
-                            imgTitle={card.title}
+                            imgTitle={card.imgTitle}
                             color={card.color}
                             key={index}
                             bg={card.bg}
@@ -150,7 +156,7 @@ export default function Caroussel({ mainArray, firstArray, secondArray }) {
                     {firstArray.map((card, index) => (
                         <Card
                             imgUrl={card.imgUrl}
-                            imgTitle={card.title}
+                            imgTitle={card.imgTitle}
                             color={card.color}
                             key={index}
                             bg={card.bg}
@@ -165,7 +171,7 @@ export default function Caroussel({ mainArray, firstArray, secondArray }) {
                             key={index}
                             onClick={() => handleCardClick(detail)}
                             imgUrl={detail.imgUrl}
-                            imgTitle={detail.title}
+                            imgTitle={detail.imgTitle}
                             color={detail.color}
                             hover={detail.hover}
                             bg={detail.bg}
@@ -176,7 +182,7 @@ export default function Caroussel({ mainArray, firstArray, secondArray }) {
                             color={detail.color}
                             hover={detail.hover}
                             imgUrl={detail.imgUrl}
-                            imgTitle={detail.title}
+                            imgTitle={detail.imgTitle}
                             bg={detail.bg}
                         />
                     ),
@@ -187,7 +193,7 @@ export default function Caroussel({ mainArray, firstArray, secondArray }) {
                     {secondArray.map((card, index) => (
                         <Card
                             imgUrl={card.imgUrl}
-                            imgTitle={card.title}
+                            imgTitle={card.imgTitle}
                             color={card.color}
                             key={index}
                         />
@@ -197,7 +203,7 @@ export default function Caroussel({ mainArray, firstArray, secondArray }) {
                     {secondArray.map((card, index) => (
                         <Card
                             imgUrl={card.imgUrl}
-                            imgTitle={card.title}
+                            imgTitle={card.imgTitle}
                             color={card.color}
                             key={index}
                         />
@@ -207,7 +213,7 @@ export default function Caroussel({ mainArray, firstArray, secondArray }) {
                     {secondArray.map((card, index) => (
                         <Card
                             imgUrl={card.imgUrl}
-                            imgTitle={card.title}
+                            imgTitle={card.imgTitle}
                             color={card.color}
                             key={index}
                         />

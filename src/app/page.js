@@ -15,7 +15,13 @@ import { useState, useEffect } from 'react';
 
 export default function Home() {
     const [isLoading, setIsLoading] = useState(true);
-
+    if (
+        typeof window !== 'undefined' &&
+        window.history &&
+        'scrollRestoration' in window.history
+    ) {
+        window.history.scrollRestoration = 'manual';
+    }
     useEffect(() => {
         gsap.fromTo(
             `#${stylesCard.welcome}`,
@@ -32,7 +38,6 @@ export default function Home() {
         setTimeout(() => {
             setIsLoading(false);
             document.body.style.cursor = 'default';
-            window.scrollTo(0, 0);
         }, 2500);
     }, []);
 

@@ -276,8 +276,8 @@ const ElectricCars = () => {
                     ref={bannerRef}
                     className={styles.banner}
                     src={eec}
-                    width={420}
-                    height={700}
+                    width={400}
+                    height={792}
                     alt="Doigts de fée home page"
                 />
                 <div className={styles.text}>

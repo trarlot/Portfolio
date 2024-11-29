@@ -23,7 +23,7 @@ export default function Header() {
         gsap.fromTo(
             animRef.current,
 
-            { y: '130vh' },
+            { y: '-130vh' },
             {
                 y: 0,
                 duration: 0.5,
@@ -73,35 +73,6 @@ export default function Header() {
     const handleCardClick = (card) => {
         toggleModal(card);
     };
-
-    // Gestion du clic en dehors pour fermer l'animation
-    const handleClickOutside = (event) => {
-        if (!event.target.closest(`#${styles.works}`) && isAnimating) {
-            gsap.to([eccRef.current, ddfRef.current], {
-                width: 0,
-                height: 0,
-                marginTop: 0,
-                marginLeft: 0,
-                stagger: 0.1,
-                duration: 0.2,
-                delay: 0.1,
-            });
-            gsap.to([eccRef.current, ddfRef.current], {
-                color: 'transparent',
-                stagger: 0.1,
-                duration: 0.2,
-            });
-            setIsAnimating(false); // Réinitialise l'état
-        }
-    };
-
-    // Ajoute l'écouteur de clic sur le document pour détecter les clics en dehors
-    useLayoutEffect(() => {
-        document.addEventListener('click', handleClickOutside);
-        return () => {
-            document.removeEventListener('click', handleClickOutside);
-        };
-    }, [isAnimating]);
 
     return (
         <div className={styles.containerHeader}>

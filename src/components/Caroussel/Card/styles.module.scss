@@ -55,8 +55,8 @@
         display: flex;
         border-radius: 11px;
         position: relative;
-        align-items: end;
-        justify-content: end;
+        align-items: flex-end;
+        justify-content: flex-end;
         z-index: 5;
         box-shadow: -20px 20px 0 0 var(--shadow-color);
         transition: 0.3s;
@@ -194,6 +194,11 @@
     &:nth-child(13) {
         .bg {
             transform: translateY(-70px);
+        }
+    }
+    &:nth-child(7) {
+        .bg {
+            transform: translateY(-18px);
         }
     }
 

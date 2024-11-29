@@ -211,9 +211,9 @@ const Contact = () => {
                     ref={bannerRef}
                     className={styles.banner}
                     src={moi}
-                    width={450}
-                    height={550}
-                    alt="Tristan Arlot Web Developer"
+                    width={416}
+                    height={654}
+                    alt="Photo Tristan Arlot"
                 />
                 <div className={styles.text}>
                     <div className={styles.textHeader}>
@@ -247,9 +247,9 @@ const Contact = () => {
                     <a
                         ref={instaRef}
                         target="_blank"
-                        href=""
+                        href="https://x.com/TristanArlot"
                         className={styles.reseau}>
-                        Instagram
+                        Twitter / X
                     </a>
                     <a
                         ref={linkedinRef}

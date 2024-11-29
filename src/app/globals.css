@@ -7,7 +7,11 @@ body {
     Ubuntu, Cantarell, 'Fira Sans', 'Saira Condensed', 'Droid Sans',
     'Helvetica Neue', sans-serif;
   cursor: wait;
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+  overflow: hidden;
 }
+
 p {
   margin: 0;
 }

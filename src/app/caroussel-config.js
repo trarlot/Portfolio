@@ -38,6 +38,12 @@ export const cardTop = [
 
         imgTitle: 'Logo CSS',
     },
+    {
+        color: 'rgb(75, 75, 75)',
+        imgUrl: '/assets/figma_logo.svg',
+
+        imgTitle: 'Logo Figma',
+    },
 ];
 
 export const cardBottom = [
@@ -45,13 +51,13 @@ export const cardBottom = [
         color: 'rgb(240, 100, 39)',
         imgUrl: '/assets/html.png',
 
-        imgTitle: '',
+        imgTitle: 'logo html',
     },
     {
         color: 'rgb(56, 168, 255)',
         imgUrl: '/assets/photoshop.svg',
 
-        imgTitle: '',
+        imgTitle: 'logo photoshop',
     },
 
     {
@@ -65,7 +71,13 @@ export const cardBottom = [
         color: 'rgb(0, 229, 89)',
         imgUrl: '/assets/GSAP.svg',
 
-        imgTitle: '',
+        imgTitle: 'logo GSAP',
+    },
+    {
+        color: 'rgb(255, 255, 255)',
+        imgUrl: '/assets/git_icon.png',
+
+        imgTitle: 'logo git',
     },
 ];
 
@@ -110,7 +122,7 @@ export const cardMiddle = [
         hover: 'DOIGTS DE FEE',
         imgUrl: '/assets/ClickIcon.png',
         bg: '/assets/doigtsdefee.jpg',
-        imgTitle: '',
+        imgTitle: 'cover doigts de fee',
     },
     {
         color: 'rgb(55, 55, 55)',
@@ -131,7 +143,7 @@ export const cardMiddle = [
         imgUrl: '/assets/ClickIcon.png',
         bg: '/assets/electricCars.jpg',
 
-        imgTitle: '',
+        imgTitle: 'cover electric cars',
     },
     {
         color: 'rgb(55, 55, 55)',
@@ -152,7 +164,7 @@ export const cardMiddle = [
         imgUrl: '/assets/ClickIcon.png',
         bg: '/assets/tristan.jpg',
 
-        imgTitle: '',
+        imgTitle: 'Photo Tristan Arlot',
     },
     {
         color: 'rgb(55, 55, 55)',

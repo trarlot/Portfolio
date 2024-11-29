@@ -10,10 +10,12 @@
         .banner {
             border-radius: 8px;
             width: 50%;
+            height: auto;
         }
         .text {
             color: white;
             display: flex;
+            width: 50%;
             flex-direction: column;
             justify-content: space-between;
             .textHeader {
@@ -55,7 +57,7 @@
     .content {
         display: flex;
         justify-content: center;
-        align-items: end;
+        align-items: flex-end;
         flex-direction: column;
         gap: 100px;
         .reseaux {
@@ -95,7 +97,7 @@
         }
         .button {
             display: flex;
-            justify-self: end;
+            justify-self: flex-end;
             justify-content: center;
             text-decoration: none;
             color: rgb(37, 37, 37);

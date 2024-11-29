@@ -266,7 +266,7 @@ const DoigtsDeFee = () => {
                     ref={bannerRef}
                     className={styles.banner}
                     src={ddf}
-                    width={420}
+                    width={430}
                     height={700}
                     alt="Doigts de fée home page"
                 />
