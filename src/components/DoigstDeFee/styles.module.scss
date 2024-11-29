@@ -113,21 +113,21 @@
             &:after {
                 position: absolute;
                 content: '';
-                height: 75%;
+                height: 100%;
                 width: 100%;
                 top: 0;
                 left: 0;
                 background: linear-gradient(
                     to bottom,
-                    rgba(255, 0, 0, 0) 40%,
-                    #202020 75%
+                    rgba(255, 0, 0, 0) 7%,
+                    #202020 61%
                 );
             }
             .banner {
                 position: absolute;
                 width: 100%;
                 height: auto;
-                top: -60%;
+                top: -15%;
             }
             .text {
                 padding: 0 50px;
@@ -142,6 +142,11 @@
                     justify-content: flex-end;
                     gap: 75px;
                     .title {
+                        flex-direction: row;
+                        flex-wrap: wrap;
+                        justify-content: center;
+                        max-width: 500px;
+                        margin: 0 auto;
                         p {
                             font-size: 110px;
                             line-height: 85px;
@@ -163,10 +168,10 @@
 @media screen and (max-width: 650px) {
     .work {
         .header {
-            height: 800px;
+            height: 700px;
 
             .banner {
-                top: -2%;
+                top: -15%;
             }
             .text {
                 padding: 0 20px;
@@ -209,6 +214,44 @@
                 font-size: 25px;
                 padding: 30px 0;
                 max-width: 325px;
+            }
+        }
+    }
+}
+@media screen and (max-width: 450px) {
+    .work {
+        .header {
+            height: 500px;
+            .banner {
+                top: -15%;
+            }
+            .text {
+                bottom: 50px;
+                .textHeader {
+                    gap: 35px;
+
+                    .title {
+                        gap: 10px;
+                        max-width: 300px;
+                        p {
+                            font-size: 50px;
+                            line-height: 45px;
+                        }
+                    }
+                    .subtitle {
+                        font-size: 20px;
+                        line-height: 23px;
+                    }
+                }
+                .infos {
+                    font-size: 22px;
+
+                    .row {
+                        .light {
+                            font-size: 20px;
+                        }
+                    }
+                }
             }
         }
     }

@@ -227,3 +227,37 @@
         }
     }
 }
+@media screen and (max-width: 450px) {
+    .work {
+        .header {
+            height: 550px;
+
+            .text {
+                .textHeader {
+                    gap: 35px;
+
+                    .title {
+                        gap: 10px;
+                        p {
+                            font-size: 50px;
+                            line-height: 45px;
+                        }
+                    }
+                    .subtitle {
+                        font-size: 20px;
+                        line-height: 23px;
+                    }
+                }
+                .infos {
+                    font-size: 22px;
+
+                    .row {
+                        .light {
+                            font-size: 20px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

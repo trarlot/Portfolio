@@ -211,3 +211,30 @@
         }
     }
 }
+@media screen and (max-width: 450px) {
+    .work {
+        .header {
+            height: 500px;
+            .banner {
+                top: -30%;
+            }
+            .text {
+                .textHeader {
+                    gap: 35px;
+
+                    .title {
+                        gap: 10px;
+                        p {
+                            font-size: 50px;
+                            line-height: 45px;
+                        }
+                    }
+                    .subtitle {
+                        font-size: 20px;
+                        line-height: 23px;
+                    }
+                }
+            }
+        }
+    }
+}
