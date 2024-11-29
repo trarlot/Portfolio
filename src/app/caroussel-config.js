@@ -28,7 +28,7 @@ export const cardTop = [
     },
     {
         color: 'rgb(255, 255, 255)',
-        imgUrl: '/assets/next.svg',
+        imgUrl: '/assets/nextlogo.svg',
 
         imgTitle: 'Logo next.js',
     },
@@ -40,7 +40,7 @@ export const cardTop = [
     },
     {
         color: 'rgb(75, 75, 75)',
-        imgUrl: '/assets/figma_logo.svg',
+        imgUrl: '/assets/figma.svg',
 
         imgTitle: 'Logo Figma',
     },
@@ -75,7 +75,7 @@ export const cardBottom = [
     },
     {
         color: 'rgb(255, 255, 255)',
-        imgUrl: '/assets/git_icon.png',
+        imgUrl: '/assets/git.png',
 
         imgTitle: 'logo git',
     },
