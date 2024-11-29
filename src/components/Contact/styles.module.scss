@@ -153,6 +153,8 @@
                 position: absolute;
                 bottom: 0;
                 z-index: 1;
+                width: 100%;
+                box-sizing: border-box;
                 text-align: center;
                 .textHeader {
                     justify-content: flex-end;
