@@ -4,7 +4,6 @@
     width: 100%;
     gap: 150px;
     will-change: transform;
-
     position: fixed;
     z-index: 4;
     transform: rotateY(30deg) rotateX(41deg) rotateZ(-15deg);
@@ -20,9 +19,9 @@
         gap: 75px;
         will-change: transform;
     }
+
     .caroussel_container {
         will-change: transform;
-
         position: absolute;
         &:first-child {
             top: -27vh;

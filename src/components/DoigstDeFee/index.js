@@ -5,10 +5,12 @@ import { useRef, useEffect } from 'react';
 import { Saira_Condensed } from 'next/font/google';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import ddf from '@/../public/assets/doigtsdefee.jpg';
-import ddf1 from '@/../public/assets/DDF1.jpg';
-import ddf2 from '@/../public/assets/DDF2.jpg';
-import ddf3 from '@/../public/assets/DDF3.jpg';
-import ddf4 from '@/../public/assets/DDF4.jpg';
+import ddf1 from '@/../public/assets/doigts-de-fee-website.jpg';
+import ddf2 from '@/../public/assets/doigts-de-fee-website-2.jpg';
+import ddf3 from '@/../public/assets/doigts-de-fee-website-3.jpg';
+import ddf4 from '@/../public/assets/doigts-de-fee-website-4.jpg';
+import ddf5 from '@/../public/assets/doigts-de-fee-website-5.jpg';
+import ddf6 from '@/../public/assets/doigts-de-fee-website-6.jpg';
 import stylesWrapper from '../../components/CarousselWrapper/styles.module.scss';
 
 const saira_init = Saira_Condensed({
@@ -229,6 +231,7 @@ const DoigtsDeFee = () => {
                 }
             },
         });
+
         ScrollTrigger.create({
             trigger: containerVideoRef.current,
             start: 'top bottom-=10%',
@@ -359,12 +362,19 @@ const DoigtsDeFee = () => {
                         ref={videoRef}
                         loop
                         muted
-                        poster="/assets/DDF1.jpg"
+                        poster="/assets/doigts-de-fee-video-poster.jpg"
                         width="320"
                         height="240"
                         controls
                         preload="none">
-                        <source src="/assets/DDFVid.mp4" type="video/mp4" />
+                        <source
+                            src="/assets/doigts-de-fee-video.mov"
+                            type="video/mov"
+                        />
+                        <source
+                            src="/assets/doigts-de-fee-video.mp4"
+                            type="video/mp4"
+                        />
                         Your browser does not support the video tag.
                     </video>
                 </div>

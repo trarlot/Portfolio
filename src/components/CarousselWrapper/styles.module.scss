@@ -19,17 +19,11 @@
     height: 100vh;
     z-index: 11;
     top: 0;
+    scrollbar-width: none;
     &::-webkit-scrollbar {
-        width: 8px;
+        display: none;
     }
 
-    &::-webkit-scrollbar-track {
-        background: transparent;
-    }
-
-    &::-webkit-scrollbar-thumb {
-        background-color: transparent;
-    }
     .ref {
         max-width: 1000px;
         width: 100%;

@@ -21,7 +21,7 @@ export default function Caroussel({ mainArray, firstArray, secondArray }) {
     let direction = -1;
     let animationFrameId;
     const isAnimatingRef = useRef(true); // Utilisation d'un ref pour gérer l'animation
-    const [renderTrigger, setRenderTrigger] = useState(false); // État pour forcer un re-render
+    const resizeObserverRef = useRef(null); // Référence pour l'observateur
 
     // Fonction qui ajoute une un caroussel devant et derriere le caroussel original
     const adjustDivPositions = () => {
@@ -39,38 +39,37 @@ export default function Caroussel({ mainArray, firstArray, secondArray }) {
 
     // Utilisation de ResizeObserver pour surveiller les changements de taille
     useLayoutEffect(() => {
-        const resizeObserver = new ResizeObserver(() => {
-            adjustDivPositions(); // Ajustement lors du changement de taille
-        });
+        if (!resizeObserverRef.current) {
+            resizeObserverRef.current = new ResizeObserver(() => {
+                adjustDivPositions(); // Ajustement lors du changement de taille
+            });
+        }
 
         // Observer les divs qui doivent être surveillées
-        if (firstDiv.current) resizeObserver.observe(firstDiv.current);
-        if (thirdDiv.current) resizeObserver.observe(thirdDiv.current);
+        if (firstDiv.current)
+            resizeObserverRef.current.observe(firstDiv.current);
+        if (thirdDiv.current)
+            resizeObserverRef.current.observe(thirdDiv.current);
 
         // Ajustement initial
         adjustDivPositions();
-
-        return () => {
-            resizeObserver.disconnect(); // Déconnexion de l'observateur lors du nettoyage
-        };
     }, []); // Pas de dépendances car les refs ne changent pas
 
     useLayoutEffect(() => {
         document.body.style.overflow = 'hidden'; // Ajout de overflow hidden sur le body
-
+        document.querySelector(`.${stylesMain.main}`).style.height =
+            slider.current.offsetWidth + 'px';
         setTimeout(() => {
             // Ajout d'un setTimeout de 2500ms
-            document.body.style.overflow = 'auto';
-            document.querySelector(`.${stylesMain.main}`).style.height =
-                slider.current.offsetWidth + 'px';
+            document.body.style.overflow = 'scroll';
 
             requestAnimationFrame(animate);
             gsap.registerPlugin(ScrollTrigger);
             gsap.to([firstDiv.current, secondDiv.current, secondDiv2.current], {
                 scrollTrigger: {
                     id: 'animation1',
-                    trigger: `.${styles.container}`,
-                    scrub: 0.25,
+                    trigger: `.${stylesMain.main}`,
+                    scrub: 1,
                     start: 0,
                     endTrigger: `.${stylesMain.main}`,
                     end: 'bottom bottom',
@@ -81,8 +80,8 @@ export default function Caroussel({ mainArray, firstArray, secondArray }) {
             gsap.to([thirdDiv.current, fourthDiv.current, fourthDiv2.current], {
                 scrollTrigger: {
                     id: 'animation2',
-                    trigger: `.${styles.container}`,
-                    scrub: 0.25,
+                    trigger: `.${stylesMain.main}`,
+                    scrub: 1,
                     start: 0,
                     endTrigger: `.${stylesMain.main}`,
                     end: 'bottom bottom',
@@ -97,7 +96,7 @@ export default function Caroussel({ mainArray, firstArray, secondArray }) {
                     id: 'scrollTriggerAnim',
                     trigger: `.${stylesMain.main}`,
                     start: 'top top',
-                    scrub: 0.03,
+                    scrub: 1,
                     end: 'bottom bottom',
                 },
             });
@@ -108,9 +107,9 @@ export default function Caroussel({ mainArray, firstArray, secondArray }) {
         if (isAnimatingRef.current) {
             // Exécuter l'animation seulement si isAnimatingRef.current est true
             if (xPercent < -100) {
-                xPercent = 0;
+                xPercent = 0; // Réinitialiser à 0 si en dessous de -100
             } else if (xPercent > 0) {
-                xPercent = -100;
+                xPercent = -99; // Réinitialiser à -100 si au-dessus de 100
             }
             gsap.set(firstDiv.current, { xPercent: xPercent });
             gsap.set(secondDiv.current, { xPercent: xPercent });

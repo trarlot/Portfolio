@@ -22,15 +22,6 @@ function CarousselContent({ firstArray, secondArray, mainArray }) {
     const overlayRef = useRef(null);
 
     useEffect(() => {
-        const lenis = new Lenis();
-        const raf = (time) => {
-            lenis.raf(time);
-            requestAnimationFrame(raf);
-        };
-        requestAnimationFrame(raf);
-    }, []);
-
-    useEffect(() => {
         if (selectedCard) {
             switch (selectedCard.id) {
                 case 'doigtsDeFee':
@@ -64,10 +55,6 @@ function CarousselContent({ firstArray, secondArray, mainArray }) {
                 { opacity: 0 }, // Départ de l'animation (transparent)
                 { opacity: 1, duration: 0.5 }, // Devient opaque
             );
-            // Ajouter un écouteur d'événements pour le défilement
-            modalRef.current.addEventListener('wheel', allowScroll, {
-                passive: false,
-            });
         } else if (container_modal.current) {
             // Animation de disparition quand la modal se ferme
             gsap.to(container_modal.current, {
@@ -78,17 +65,7 @@ function CarousselContent({ firstArray, secondArray, mainArray }) {
                     toggleModal(); // Ferme la modal après l'animation
                 },
             });
-            container_modal.current.removeEventListener('wheel', allowScroll);
         }
-
-        return () => {
-            if (container_modal.current) {
-                container_modal.current.removeEventListener(
-                    'wheel',
-                    allowScroll,
-                );
-            }
-        };
     }, [isOpen]);
 
     const handleCloseModal = () => {
