@@ -82,7 +82,9 @@
             gap: 20px;
             flex-wrap: wrap;
             justify-content: center;
+
             .photo {
+                min-width: 45%;
                 width: 45%;
                 flex: 1 1;
                 border-radius: 11px;

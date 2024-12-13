@@ -336,13 +336,7 @@ const ElectricCars = () => {
                     Electric Cars is a website I worked on during my permanent
                     contract at SpiderVO. Our team included two integrators and
                     a web designer. Here, you’ll find the pages I worked on,
-                    particularly focusing on animations. Click{' '}
-                    <a
-                        target="_blank"
-                        href="https://www.electriccarsconseil.fr/electric-cars-conseil,svoc395.html">
-                        here
-                    </a>{' '}
-                    to check the website.
+                    particularly focusing on animations.
                 </p>
                 <div ref={photosRef} className={styles.photos}>
                     <video
