@@ -44,7 +44,7 @@ const ElectricCars = () => {
         if (!animationExecuted.current) {
             gsap.registerPlugin(ScrollTrigger);
 
-            if (window.matchMedia('(min-width: 1050px)').matches) {
+            if (window.matchMedia('(min-width:1024px)').matches) {
                 gsap.fromTo(
                     bannerRef.current,
                     { xPercent: -110 },

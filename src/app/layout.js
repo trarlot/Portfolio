@@ -1,5 +1,6 @@
 import { Inter } from 'next/font/google';
 import Header from '../components/Header';
+import { useNavigateContext, NavigateProvider } from '@/context/navContaxt';
 import { useModalContext, ModalProvider } from '@/context/modalContext';
 import './globals.css';
 
@@ -40,10 +41,12 @@ export default function RootLayout({ children }) {
                 {/* Les balises meta seront automatiquement générées par Next.js */}
             </head>
             <ModalProvider>
-                <body className={inter.className}>
-                    <Header />
-                    {children}
-                </body>
+                <NavigateProvider>
+                    <body className={inter.className}>
+                        <Header />
+                        {children}
+                    </body>
+                </NavigateProvider>
             </ModalProvider>
         </html>
     );

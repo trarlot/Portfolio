@@ -102,7 +102,7 @@ export const cardMiddle = [
     },
     {
         color: 'rgb(0, 0, 0)',
-        hover: 'SCROLL DOWN. ',
+        hover: 'SCROLL DOWN',
     },
     {
         color: 'rgb(55, 55, 55)',

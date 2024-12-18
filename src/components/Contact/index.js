@@ -47,7 +47,7 @@ const Contact = () => {
                     ease: 'power1.out',
                 },
             );
-            if (window.matchMedia('(min-width: 1050px)').matches) {
+            if (window.matchMedia('(min-width: 1024px)').matches) {
                 gsap.fromTo(
                     bannerRef.current,
                     { xPercent: -110 },

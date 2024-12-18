@@ -6,9 +6,11 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/all';
 import Card from './Card';
 import { useModalContext } from '@/context/modalContext';
+import { useNavigateContext } from '@/context/navContaxt';
 
 export default function Caroussel({ mainArray, firstArray, secondArray }) {
     const { isOpen, toggleModal } = useModalContext();
+    const { navigate } = useNavigateContext();
     const firstDiv = useRef(null);
     const secondDiv = useRef(null);
     const secondDiv2 = useRef(null);
@@ -22,7 +24,6 @@ export default function Caroussel({ mainArray, firstArray, secondArray }) {
     let animationFrameId;
     const isAnimatingRef = useRef(true); // Utilisation d'un ref pour gérer l'animation
     const resizeObserverRef = useRef(null); // Référence pour l'observateur
-
     // Fonction qui ajoute une un caroussel devant et derriere le caroussel original
     const adjustDivPositions = () => {
         if (firstDiv.current && secondDiv.current) {
@@ -44,7 +45,9 @@ export default function Caroussel({ mainArray, firstArray, secondArray }) {
                 adjustDivPositions(); // Ajustement lors du changement de taille
             });
         }
-
+        if (typeof window !== 'undefined' && window.innerWidth < 1024) {
+            mainArray[3].hover = 'HIT THE ARROWS';
+        }
         // Observer les divs qui doivent être surveillées
         if (firstDiv.current)
             resizeObserverRef.current.observe(firstDiv.current);
@@ -59,12 +62,18 @@ export default function Caroussel({ mainArray, firstArray, secondArray }) {
         document.body.style.overflow = 'hidden'; // Ajout de overflow hidden sur le body
         document.querySelector(`.${stylesMain.main}`).style.height =
             slider.current.offsetWidth + 'px';
+
+        // Utilisation de GSAP matchMedia pour vérifier la largeur de la fenêtre
+        const mm = gsap.matchMedia();
+
         setTimeout(() => {
             // Ajout d'un setTimeout de 2500ms
             document.body.style.overflow = 'scroll';
 
             requestAnimationFrame(animate);
             gsap.registerPlugin(ScrollTrigger);
+
+            // Animation GSAP uniquement si la largeur est supérieure à 1024px
             gsap.to([firstDiv.current, secondDiv.current, secondDiv2.current], {
                 scrollTrigger: {
                     id: 'animation1',
@@ -88,19 +97,29 @@ export default function Caroussel({ mainArray, firstArray, secondArray }) {
                 },
                 x: '-1000px',
             });
-
-            gsap.to(slider.current, {
-                xPercent: -57,
-                ease: 'none',
-                scrollTrigger: {
-                    id: 'scrollTriggerAnim',
-                    trigger: `.${stylesMain.main}`,
-                    start: 'top top',
-                    scrub: 1,
-                    end: 'bottom bottom',
-                },
+            mm.add('(min-width: 1024px)', () => {
+                gsap.fromTo(
+                    slider.current,
+                    { xPercent: -12 },
+                    {
+                        xPercent: -65,
+                        ease: 'none',
+                        scrollTrigger: {
+                            id: 'scrollTriggerAnim',
+                            trigger: `.${stylesMain.main}`,
+                            start: 'top top',
+                            scrub: 1,
+                            end: 'bottom bottom',
+                        },
+                    },
+                );
             });
         }, 2500); // Délai de 2500ms avant d'activer le ScrollTrigger
+
+        // Nettoyage de l'écouteur
+        return () => {
+            mm.revert(); // Réinitialiser les animations si la condition ne s'applique plus
+        };
     }, []);
 
     const animate = () => {
@@ -125,6 +144,31 @@ export default function Caroussel({ mainArray, firstArray, secondArray }) {
     const handleCardClick = (card) => {
         toggleModal(card);
     };
+
+    useEffect(() => {
+        gsap.to(slider.current, {
+            x: -navigate, // Animation GSAP en fonction de navigate
+            duration: 1, // Durée de l'animation
+        });
+    }, [navigate]); // Dépendance à navigate
+
+    // Ajout d'un effet pour ajuster xPercent lors du changement de navigate
+    useEffect(() => {
+        gsap.to(
+            [
+                firstDiv.current,
+                secondDiv.current,
+                secondDiv2.current,
+                thirdDiv.current,
+                fourthDiv.current,
+                fourthDiv2.current,
+            ],
+            {
+                duration: 1,
+                x: -navigate / 4, // Déplacer de 10% lors du changement de navigate
+            },
+        );
+    }, [navigate]); // Dépendance à navigate
 
     return (
         <div ref={container} className={styles.container}>

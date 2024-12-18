@@ -78,7 +78,7 @@
         flex-direction: column;
         justify-content: space-around;
         gap: 100px;
-        padding: 100px 0;
+        padding: 100px 0 0 0;
         .intro {
             color: white;
             font-family: 'Helvetica Neue', sans-serif;
@@ -91,7 +91,7 @@
         }
         .photos {
             display: flex;
-            gap: 100px;
+            gap: 70px;
             flex-wrap: wrap;
             justify-content: center;
             .photo,
@@ -115,7 +115,7 @@
         }
     }
 }
-@media screen and (max-width: 1050px) {
+@media screen and (max-width: 1024px) {
     .work {
         .header {
             flex-direction: column;

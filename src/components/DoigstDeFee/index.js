@@ -41,7 +41,7 @@ const DoigtsDeFee = () => {
     useEffect(() => {
         if (!animationExecuted.current) {
             gsap.registerPlugin(ScrollTrigger);
-            if (window.matchMedia('(min-width: 1050px)').matches) {
+            if (window.matchMedia('(min-width: 1024px)').matches) {
                 gsap.fromTo(
                     bannerRef.current,
                     { xPercent: -110 },
@@ -114,8 +114,8 @@ const DoigtsDeFee = () => {
     const configureScrollTrigger = () => {
         ScrollTrigger.create({
             trigger: photo1Ref.current,
-            start: 'top bottom-=10%',
-            end: 'top bottom-=10%',
+            start: 'top bottom',
+            end: 'top bottom',
             scroller: `.${stylesWrapper.container_modal}`,
             onEnter: () => {
                 if (photo1Ref.current) {
@@ -146,8 +146,8 @@ const DoigtsDeFee = () => {
         });
         ScrollTrigger.create({
             trigger: photo2Ref.current,
-            start: 'top bottom-=10%',
-            end: 'top bottom-=10%',
+            start: 'top bottom',
+            end: 'top bottom',
             scroller: `.${stylesWrapper.container_modal}`,
 
             onEnter: () => {
@@ -179,9 +179,9 @@ const DoigtsDeFee = () => {
         });
         ScrollTrigger.create({
             trigger: photo3Ref.current,
-            start: 'top bottom-=10%',
-            end: 'top bottom-=10%',
-
+            start: 'top-=400px bottom',
+            end: 'top-=400px bottom',
+            markers: true,
             scroller: `.${stylesWrapper.container_modal}`,
             onEnter: () => {
                 if (photo3Ref.current) {
@@ -206,10 +206,10 @@ const DoigtsDeFee = () => {
         });
         ScrollTrigger.create({
             trigger: photo4Ref.current,
-            start: 'top bottom-=10%',
-            end: 'top bottom-=10%',
+            start: 'top-=500px bottom',
+            end: 'top-=500px bottom',
             scroller: `.${stylesWrapper.container_modal}`,
-
+            markers: true,
             onEnter: () => {
                 if (photo4Ref.current) {
                     gsap.to(photo4Ref.current, {
@@ -234,8 +234,8 @@ const DoigtsDeFee = () => {
 
         ScrollTrigger.create({
             trigger: containerVideoRef.current,
-            start: 'top bottom-=10%',
-            end: 'top bottom-=10%',
+            start: 'top bottom',
+            end: 'top bottom',
             scroller: `.${stylesWrapper.container_modal}`,
             onEnter: () => {
                 if (videoRef.current) {
@@ -323,6 +323,27 @@ const DoigtsDeFee = () => {
                 </div>
             </div>
             <div className={styles.content}>
+                <div ref={containerVideoRef} className={styles.video}>
+                    <video
+                        ref={videoRef}
+                        loop
+                        muted
+                        poster="/assets/doigts-de-fee-video-poster.jpg"
+                        width="320"
+                        height="240"
+                        controls
+                        preload="none">
+                        <source
+                            src="/assets/doigts-de-fee-video.mov"
+                            type="video/mov"
+                        />
+                        <source
+                            src="/assets/doigts-de-fee-video.mp4"
+                            type="video/mp4"
+                        />
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
                 <div className={styles.photos}>
                     <Image
                         ref={photo1Ref}
@@ -356,27 +377,6 @@ const DoigtsDeFee = () => {
                         height={801}
                         alt="Doigts de fée menu "
                     />
-                </div>
-                <div ref={containerVideoRef} className={styles.video}>
-                    <video
-                        ref={videoRef}
-                        loop
-                        muted
-                        poster="/assets/doigts-de-fee-video-poster.jpg"
-                        width="320"
-                        height="240"
-                        controls
-                        preload="none">
-                        <source
-                            src="/assets/doigts-de-fee-video.mov"
-                            type="video/mov"
-                        />
-                        <source
-                            src="/assets/doigts-de-fee-video.mp4"
-                            type="video/mp4"
-                        />
-                        Your browser does not support the video tag.
-                    </video>
                 </div>
             </div>
         </div>
