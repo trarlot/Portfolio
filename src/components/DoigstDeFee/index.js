@@ -181,7 +181,6 @@ const DoigtsDeFee = () => {
             trigger: photo3Ref.current,
             start: 'top-=400px bottom',
             end: 'top-=400px bottom',
-            markers: true,
             scroller: `.${stylesWrapper.container_modal}`,
             onEnter: () => {
                 if (photo3Ref.current) {
@@ -209,7 +208,6 @@ const DoigtsDeFee = () => {
             start: 'top-=500px bottom',
             end: 'top-=500px bottom',
             scroller: `.${stylesWrapper.container_modal}`,
-            markers: true,
             onEnter: () => {
                 if (photo4Ref.current) {
                     gsap.to(photo4Ref.current, {
