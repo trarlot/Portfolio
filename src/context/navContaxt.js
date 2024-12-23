@@ -26,11 +26,7 @@ export function NavigateProvider({ children }) {
         return elementRect.left + elementRect.width / 2 - parentRect.left;
     };
     const toggleLeft = () => {
-        const windowWidth = window.innerWidth;
-        const halfWindowWidth = windowWidth / 4;
-        setNavigate((prev) =>
-            Math.max(distance - halfWindowWidth, prev - distance - 62),
-        );
+        setNavigate((prev) => Math.max(distance, prev - distance - 62));
     };
     const toggleRight = () => {
         const cardLenght = document.querySelectorAll(
