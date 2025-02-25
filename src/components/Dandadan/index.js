@@ -328,7 +328,7 @@ const DoigtsDeFee = () => {
                         controls
                         preload="none">
                         <source
-                            src="/assets/doigts-de-fee-video.mov"
+                            src="/assets/dandadan-video.mov"
                             type="video/mov"
                         />
                         <source

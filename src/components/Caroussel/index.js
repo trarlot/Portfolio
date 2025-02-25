@@ -102,7 +102,7 @@ export default function Caroussel({ mainArray, firstArray, secondArray }) {
                     slider.current,
                     { xPercent: -12 },
                     {
-                        xPercent: -65,
+                        xPercent: -75,
                         ease: 'none',
                         scrollTrigger: {
                             id: 'scrollTriggerAnim',
