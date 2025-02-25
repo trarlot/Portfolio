@@ -329,6 +329,7 @@ const DoigtsDeFee = () => {
                         poster="/assets/doigts-de-fee-video-poster.jpg"
                         width="320"
                         height="240"
+                        playsinline
                         controls
                         preload="none">
                         <source

@@ -325,6 +325,7 @@ const DoigtsDeFee = () => {
                         poster="/assets/dandadan-poster.jpg"
                         width="320"
                         height="240"
+                        playsinline
                         controls
                         preload="none">
                         <source
