@@ -243,6 +243,11 @@ const Contact = () => {
                 </div>
             </div>
             <div ref={contentRef} className={styles.content}>
+                <div className={styles.skills}>
+                    <div className={styles.skill}>
+                        <p>HTML</p>
+                    </div>
+                </div>
                 <div className={styles.reseaux}>
                     <a
                         ref={instaRef}

@@ -333,7 +333,7 @@ const DoigtsDeFee = () => {
                             type="video/mov"
                         />
                         <source
-                            src="/assets/dandadan-video.mp4"
+                            src="/assets/dandadanVideo.mp4"
                             type="video/mp4"
                         />
                         Your browser does not support the video tag.
