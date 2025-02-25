@@ -1,7 +1,7 @@
 'use client';
 import styles from './styles.module.scss';
 import { Saira_Condensed } from 'next/font/google';
-import { cardHeader, cardDDF, cardECC } from '@/app/caroussel-config';
+import { cardHeader, cardDDF, cardECC, cardDDD } from '@/app/caroussel-config';
 import { useRef, useLayoutEffect, useState } from 'react';
 import { useModalContext } from '@/context/modalContext';
 import { useNavigateContext } from '@/context/navContaxt';
@@ -17,6 +17,7 @@ export default function Header() {
     const { toggleLeft, toggleRight } = useNavigateContext();
     const ddfRef = useRef(null);
     const eccRef = useRef(null);
+    const dddRef = useRef(null);
     const animRef = useRef(null);
     const [isAnimating, setIsAnimating] = useState(false); // État pour suivre l'animation
 
@@ -45,7 +46,7 @@ export default function Header() {
 
     const handleClick = () => {
         if (!isAnimating) {
-            gsap.to([ddfRef.current, eccRef.current], {
+            gsap.to([ddfRef.current, eccRef.current, dddRef.current], {
                 width: 150,
                 height: 50,
                 marginTop: -25,
@@ -53,14 +54,14 @@ export default function Header() {
                 stagger: 0.1,
                 duration: 0.2,
             });
-            gsap.to([ddfRef.current, eccRef.current], {
+            gsap.to([ddfRef.current, eccRef.current, dddRef.current], {
                 color: 'white',
                 delay: 0.2,
                 stagger: 0.1,
                 duration: 0.2,
             });
         } else {
-            gsap.to([eccRef.current, ddfRef.current], {
+            gsap.to([eccRef.current, ddfRef.current, dddRef.current], {
                 width: 0,
                 height: 0,
                 marginTop: 0,
@@ -69,7 +70,7 @@ export default function Header() {
                 delay: 0.1,
                 duration: 0.2,
             });
-            gsap.to([eccRef.current, ddfRef.current], {
+            gsap.to([eccRef.current, ddfRef.current, dddRef.current], {
                 color: 'transparent',
                 stagger: 0.1,
                 duration: 0.2,
@@ -85,7 +86,7 @@ export default function Header() {
     // Gestion du clic en dehors pour fermer l'animation
     const handleClickOutside = (event) => {
         if (!event.target.closest(`#${styles.works}`) && isAnimating) {
-            gsap.to([eccRef.current, ddfRef.current], {
+            gsap.to([eccRef.current, ddfRef.current, dddRef.current], {
                 width: 0,
                 height: 0,
                 marginTop: 0,
@@ -94,7 +95,7 @@ export default function Header() {
                 duration: 0.2,
                 delay: 0.1,
             });
-            gsap.to([eccRef.current, ddfRef.current], {
+            gsap.to([eccRef.current, ddfRef.current, dddRef.current], {
                 color: 'transparent',
                 stagger: 0.1,
                 duration: 0.2,
@@ -161,7 +162,7 @@ export default function Header() {
                         <div
                             onClick={() => handleCardClick(cardHeader)}
                             className={styles.button}>
-                            <p className={saira_init.className}>About</p>
+                            <p className={saira_init.className}>Contact</p>
                         </div>
                     </div>
                     <div
@@ -175,6 +176,12 @@ export default function Header() {
                         ref={eccRef}
                         className={`${styles.button2} ${saira_init.className}`}>
                         Electric cars
+                    </div>
+                    <div
+                        onClick={() => handleCardClick(cardDDD)}
+                        ref={dddRef}
+                        className={`${styles.button2} ${saira_init.className}`}>
+                        Dandadan
                     </div>
                 </div>
             </div>

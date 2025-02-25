@@ -4,6 +4,7 @@ import { gsap } from 'gsap';
 import ElectricCars from '../ElectricCars';
 import Caroussel from '../Caroussel';
 import Contact from '../Contact';
+import Dandadan from '../Dandadan';
 import styles from './styles.module.scss';
 import Modal from '../Modal';
 import DoigtsDeFee from '../DoigstDeFee';
@@ -32,6 +33,9 @@ function CarousselContent({ firstArray, secondArray, mainArray }) {
                     break;
                 case 'contact':
                     setCurrentComponent(<Contact />);
+                    break;
+                case 'dandadan':
+                    setCurrentComponent(<Dandadan />);
                     break;
                 default:
                     setCurrentComponent(null);

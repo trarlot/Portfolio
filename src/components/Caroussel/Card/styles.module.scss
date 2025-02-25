@@ -191,7 +191,13 @@
         box-shadow: unset;
         background-color: unset;
     }
+
     &:nth-child(13) {
+        .bg {
+            transform: translateY(-70px);
+        }
+    }
+    &:nth-child(16) {
         .bg {
             transform: translateY(-70px);
         }

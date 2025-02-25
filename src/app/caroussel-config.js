@@ -6,6 +6,9 @@ export const cardPreloader = {
 export const cardHeader = {
     id: 'contact',
 };
+export const cardDDD = {
+    id: 'dandadan',
+};
 
 export const cardDDF = {
     id: 'doigtsDeFee',
@@ -144,6 +147,28 @@ export const cardMiddle = [
         bg: '/assets/electricCars.jpg',
 
         imgTitle: 'cover electric cars',
+    },
+    {
+        color: 'rgb(55, 55, 55)',
+        imgUrl: '',
+
+        imgTitle: '',
+    },
+    {
+        color: 'rgb(55, 55, 55)',
+        imgUrl: '',
+
+        imgTitle: '',
+    },
+
+    {
+        color: 'rgb(0, 0, 0)',
+        id: 'dandadan',
+        hover: 'DAN DADAN',
+        imgUrl: '/assets/ClickIcon.png',
+        bg: '/assets/Dandadan.jpg',
+
+        imgTitle: 'cover dandadan',
     },
     {
         color: 'rgb(55, 55, 55)',

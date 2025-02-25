@@ -150,16 +150,17 @@
                 &:hover {
                     transform: translate(50px, 28px);
                     cursor: pointer;
-                    box-shadow: 0 3px 0 0 rgb(113 112 112 / 73%),
-                        0px 2px 14px -3px rgba(0, 0, 0, 0.48);
                 }
-                &:last-child {
+                &:nth-child(3) {
                     transform: translate(50px, 50px);
                     &:hover {
                         transform: translate(50px, 53px);
-
-                        box-shadow: 0 3px 0 0 rgb(113 112 112 / 73%),
-                            0px 2px 14px -3px rgba(0, 0, 0, 0.48);
+                    }
+                }
+                &:nth-child(4) {
+                    transform: translate(50px, 75px);
+                    &:hover {
+                        transform: translate(50px, 78px);
                     }
                 }
             }
