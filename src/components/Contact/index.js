@@ -236,18 +236,13 @@ const Contact = () => {
                                 on web design and creative website. I help
                                 agencies, startups and designers by providing
                                 advanced animation and creativity in web
-                                development.{' '}
+                                development.
                             </span>
                         </p>
                     </div>
                 </div>
             </div>
             <div ref={contentRef} className={styles.content}>
-                <div className={styles.skills}>
-                    <div className={styles.skill}>
-                        <p>HTML</p>
-                    </div>
-                </div>
                 <div className={styles.reseaux}>
                     <a
                         ref={instaRef}
@@ -277,6 +272,12 @@ const Contact = () => {
                     href="mailto:tristan.arlot@hotmail.com"
                     className={`${styles.button} ${saira_init.className}`}>
                     Available for freelance work
+                </a>
+                <a
+                    target="_blank"
+                    href="https://www.malt.fr/profile/tristan-arlot"
+                    className={styles.button}>
+                    Malt
                 </a>
             </div>
         </div>
