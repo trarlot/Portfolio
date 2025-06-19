@@ -15,6 +15,7 @@ import { useState, useEffect } from 'react';
 
 export default function Home() {
     const [isLoading, setIsLoading] = useState(true);
+
     if (
         typeof window !== 'undefined' &&
         window.history &&
@@ -22,6 +23,7 @@ export default function Home() {
     ) {
         window.history.scrollRestoration = 'manual';
     }
+
     useEffect(() => {
         gsap.fromTo(
             `#${stylesCard.welcome}`,
@@ -35,6 +37,8 @@ export default function Home() {
                 duration: 0.5,
             },
         );
+
+        // Délai simple pour le preloader
         setTimeout(() => {
             setIsLoading(false);
             document.body.style.cursor = 'default';

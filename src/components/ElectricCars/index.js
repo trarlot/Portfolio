@@ -4,8 +4,6 @@ import { gsap } from 'gsap';
 import { useRef, useEffect } from 'react';
 import { Saira_Condensed } from 'next/font/google';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import eccImage from '@/../public/assets/electriccars5.jpg';
-
 import eec from '@/../public/assets/EEC.jpg';
 
 import stylesWrapper from '../../components/CarousselWrapper/styles.module.scss';
@@ -335,7 +333,7 @@ const ElectricCars = () => {
                 <p ref={introRef} className={styles.intro}>
                     Electric Cars is a website I worked on during my permanent
                     contract at SpiderVO. Our team included two integrators and
-                    a web designer. Here, you’ll find the pages I worked on,
+                    a web designer. Here, you'll find the pages I worked on,
                     particularly focusing on animations.
                 </p>
                 <div ref={photosRef} className={styles.photos}>
@@ -347,7 +345,7 @@ const ElectricCars = () => {
                         width="330"
                         height="213"
                         ref={video1Ref}
-                        preload="none">
+                        preload="auto">
                         <source
                             src="/assets/electriccars1.mp4"
                             type="video/mp4"
@@ -362,7 +360,7 @@ const ElectricCars = () => {
                         width="330"
                         height="213"
                         ref={video2Ref}
-                        preload="none">
+                        preload="auto">
                         <source
                             src="/assets/electriccars2.mp4"
                             type="video/mp4"
@@ -377,7 +375,7 @@ const ElectricCars = () => {
                         width="330"
                         height="213"
                         ref={video3Ref}
-                        preload="none">
+                        preload="auto">
                         <source
                             src="/assets/electriccars3.mp4"
                             type="video/mp4"
@@ -392,7 +390,7 @@ const ElectricCars = () => {
                         width="330"
                         height="213"
                         ref={video4Ref}
-                        preload="none">
+                        preload="auto">
                         <source
                             src="/assets/electriccars4.mp4"
                             type="video/mp4"

@@ -25,7 +25,7 @@ const Contact = () => {
     const buttonRef = useRef(null);
     const titleRef = useRef(null);
     const animationExecuted = useRef(false); // ref pour suivre l'état de l'animation
-
+    const maltRef = useRef(null);
     useEffect(() => {
         if (!animationExecuted.current) {
             gsap.registerPlugin(ScrollTrigger);
@@ -171,14 +171,15 @@ const Contact = () => {
                 if (buttonRef.current) {
                     // Désactiver la transition CSS
                     buttonRef.current.style.transition = 'none'; // Désactiver
-
-                    gsap.to(buttonRef.current, {
+                    maltRef.current.style.transition = 'none'; // Désactiver
+                    gsap.to([buttonRef.current, maltRef.current], {
                         opacity: 1,
                         y: 0,
                         duration: 0.3,
                         onComplete: () => {
                             // Réactiver la transition CSS après l'animation
                             buttonRef.current.style.transition = '.3s'; // Réactiver
+                            maltRef.current.style.transition = '.3s'; // Réactiver
                         },
                     });
                 }
@@ -187,14 +188,15 @@ const Contact = () => {
                 if (buttonRef.current) {
                     // Désactiver la transition CSS
                     buttonRef.current.style.transition = 'none'; // Désactiver
-
-                    gsap.to(buttonRef.current, {
+                    maltRef.current.style.transition = 'none'; // Désactiver
+                    gsap.to([buttonRef.current, maltRef.current], {
                         opacity: 0,
                         y: 100,
                         duration: 0.3,
                         onComplete: () => {
                             // Réactiver la transition CSS après l'animation
                             buttonRef.current.style.transition = '.3s'; // Réactiver
+                            maltRef.current.style.transition = '.3s'; // Réactiver
                         },
                     });
                 }
@@ -247,9 +249,9 @@ const Contact = () => {
                     <a
                         ref={instaRef}
                         target="_blank"
-                        href="https://x.com/TristanArlot"
+                        href="https://www.instagram.com/tristan_arlt/"
                         className={styles.reseau}>
-                        Twitter / X
+                        Instagram
                     </a>
                     <a
                         ref={linkedinRef}
@@ -274,10 +276,17 @@ const Contact = () => {
                     Available for freelance work
                 </a>
                 <a
+                    ref={maltRef}
                     target="_blank"
                     href="https://www.malt.fr/profile/tristan-arlot"
-                    className={styles.button}>
-                    Malt
+                    className={`${styles.button} ${styles.malt}`}>
+                    <Image
+                        src="/assets/malt.png"
+                        alt="Malt"
+                        className={styles.maltImage}
+                        width={150}
+                        height={40}
+                    />
                 </a>
             </div>
         </div>
