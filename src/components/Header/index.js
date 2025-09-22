@@ -1,7 +1,12 @@
 'use client';
 import styles from './styles.module.scss';
 import { Saira_Condensed } from 'next/font/google';
-import { cardHeader, cardDDF, cardECC, cardDDD } from '@/app/caroussel-config';
+import {
+    cardHeader,
+    cardMetanoia,
+    cardECC,
+    cardDDD,
+} from '@/app/caroussel-config';
 import { useRef, useLayoutEffect, useState } from 'react';
 import { useModalContext } from '@/context/modalContext';
 import { useNavigateContext } from '@/context/navContaxt';
@@ -15,7 +20,7 @@ const saira_init = Saira_Condensed({
 export default function Header() {
     const { isOpen, toggleModal } = useModalContext();
     const { toggleLeft, toggleRight } = useNavigateContext();
-    const ddfRef = useRef(null);
+    const metanoiaRef = useRef(null);
     const eccRef = useRef(null);
     const dddRef = useRef(null);
     const animRef = useRef(null);
@@ -46,7 +51,7 @@ export default function Header() {
 
     const handleClick = () => {
         if (!isAnimating) {
-            gsap.to([ddfRef.current, eccRef.current, dddRef.current], {
+            gsap.to([metanoiaRef.current, eccRef.current, dddRef.current], {
                 width: 150,
                 height: 50,
                 marginTop: -25,
@@ -54,14 +59,14 @@ export default function Header() {
                 stagger: 0.1,
                 duration: 0.2,
             });
-            gsap.to([ddfRef.current, eccRef.current, dddRef.current], {
+            gsap.to([metanoiaRef.current, eccRef.current, dddRef.current], {
                 color: 'white',
                 delay: 0.2,
                 stagger: 0.1,
                 duration: 0.2,
             });
         } else {
-            gsap.to([eccRef.current, ddfRef.current, dddRef.current], {
+            gsap.to([eccRef.current, metanoiaRef.current, dddRef.current], {
                 width: 0,
                 height: 0,
                 marginTop: 0,
@@ -70,7 +75,7 @@ export default function Header() {
                 delay: 0.1,
                 duration: 0.2,
             });
-            gsap.to([eccRef.current, ddfRef.current, dddRef.current], {
+            gsap.to([eccRef.current, metanoiaRef.current, dddRef.current], {
                 color: 'transparent',
                 stagger: 0.1,
                 duration: 0.2,
@@ -86,7 +91,7 @@ export default function Header() {
     // Gestion du clic en dehors pour fermer l'animation
     const handleClickOutside = (event) => {
         if (!event.target.closest(`#${styles.works}`) && isAnimating) {
-            gsap.to([eccRef.current, ddfRef.current, dddRef.current], {
+            gsap.to([eccRef.current, metanoiaRef.current, dddRef.current], {
                 width: 0,
                 height: 0,
                 marginTop: 0,
@@ -95,7 +100,7 @@ export default function Header() {
                 duration: 0.2,
                 delay: 0.1,
             });
-            gsap.to([eccRef.current, ddfRef.current, dddRef.current], {
+            gsap.to([eccRef.current, metanoiaRef.current, dddRef.current], {
                 color: 'transparent',
                 stagger: 0.1,
                 duration: 0.2,
@@ -166,10 +171,10 @@ export default function Header() {
                         </div>
                     </div>
                     <div
-                        onClick={() => handleCardClick(cardDDF)}
-                        ref={ddfRef}
+                        onClick={() => handleCardClick(cardMetanoia)}
+                        ref={metanoiaRef}
                         className={`${styles.button2} ${saira_init.className}`}>
-                        Doigts de fée
+                        Metanoia
                     </div>
                     <div
                         onClick={() => handleCardClick(cardECC)}

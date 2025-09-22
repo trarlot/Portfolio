@@ -1,0 +1,260 @@
+.work {
+    .header {
+        display: flex;
+        gap: 50px;
+        justify-content: space-between;
+        overflow: hidden;
+        .banner {
+            border-radius: 8px;
+            width: 52%;
+            height: auto;
+        }
+        .text {
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            .textHeader {
+                display: flex;
+                flex-direction: column;
+                gap: 30px;
+                .title {
+                    overflow: hidden;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 20px;
+                    p {
+                        overflow: hidden;
+                        font-size: 95px;
+                        line-height: 110px;
+                        margin-top: -5px;
+                        span {
+                            display: block;
+                        }
+                    }
+                }
+                p {
+                    overflow: hidden;
+
+                    span {
+                        display: block;
+                    }
+                }
+                .subtitle {
+                    font-size: 30px;
+                    line-height: 30px;
+                    font-weight: 500;
+                }
+            }
+            .infos {
+                display: flex;
+                flex-direction: column;
+                font-family: 'Helvetica Neue' sans-serif;
+                font-size: 24px;
+                font-weight: 400;
+                gap: 25px;
+                .row {
+                    display: flex;
+                    justify-content: space-between;
+
+                    .light {
+                        font-size: 22px;
+                        font-weight: 300;
+                        color: rgba(255, 255, 255, 0.3);
+                    }
+                    p {
+                        overflow: hidden;
+                        span {
+                            display: block;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .content {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        gap: 70px;
+        padding: 70px 0 0 0;
+        .photos {
+            display: flex;
+            gap: 70px;
+            flex-wrap: wrap;
+            justify-content: center;
+
+            .photo {
+                min-width: 100%;
+                width: 100%;
+                flex: 1 1;
+                border-radius: 11px;
+                height: auto;
+                opacity: 0;
+                transform: translate(0, 50%);
+            }
+        }
+        .video {
+            video {
+                opacity: 0;
+                transform: translate(0, 50%);
+                width: 100%;
+                height: auto;
+            }
+        }
+    }
+}
+@media screen and (max-width: 1024px) {
+    .work {
+        .header {
+            flex-direction: column;
+            position: relative;
+            height: 900px;
+            align-items: center;
+            width: 100%;
+            &:after {
+                position: absolute;
+                content: '';
+                height: 100%;
+                width: 100%;
+                top: 0;
+                left: 0;
+                background: linear-gradient(
+                    to bottom,
+                    rgba(255, 0, 0, 0) 7%,
+                    #202020 61%
+                );
+            }
+            .banner {
+                position: absolute;
+                width: 100%;
+                height: auto;
+                top: -15%;
+            }
+            .text {
+                padding: 0 50px;
+                position: absolute;
+                bottom: 0;
+                z-index: 1;
+                text-align: center;
+                box-sizing: border-box;
+                gap: 100px;
+                width: 100%;
+                .textHeader {
+                    justify-content: flex-end;
+                    gap: 75px;
+                    .title {
+                        flex-direction: row;
+                        flex-wrap: wrap;
+                        justify-content: center;
+                        max-width: 500px;
+                        margin: 0 auto;
+                        p {
+                            font-size: 110px;
+                            line-height: 85px;
+                        }
+                    }
+                }
+            }
+        }
+        .content {
+            padding: 50px;
+            gap: 50px;
+            align-items: center;
+            .photos {
+                margin: 0;
+            }
+        }
+    }
+}
+@media screen and (max-width: 650px) {
+    .work {
+        .header {
+            height: 700px;
+
+            .banner {
+                top: -15%;
+            }
+            .text {
+                padding: 0 20px;
+                gap: 50px;
+                .textHeader {
+                    justify-content: flex-end;
+                    gap: 50px;
+                    .title {
+                        p {
+                            font-size: 80px;
+                            line-height: 65px;
+                        }
+                    }
+                    .subtitle {
+                        font-size: 25px;
+                        line-height: 25px;
+                    }
+                }
+            }
+        }
+        .content {
+            padding: 50px 20px;
+            gap: 25px;
+            flex-direction: column;
+            .photos {
+                gap: 50px;
+                .photo {
+                    width: 100%;
+                }
+            }
+            .reseaux {
+                .reseau {
+                    font-size: 30px;
+                }
+            }
+            .video {
+                margin-top: 25px;
+            }
+            .button {
+                font-size: 25px;
+                padding: 30px 0;
+                max-width: 325px;
+            }
+        }
+    }
+}
+@media screen and (max-width: 450px) {
+    .work {
+        .header {
+            height: 500px;
+            .banner {
+                top: -15%;
+            }
+            .text {
+                bottom: 50px;
+                .textHeader {
+                    gap: 35px;
+
+                    .title {
+                        gap: 10px;
+                        max-width: 300px;
+                        p {
+                            font-size: 50px;
+                            line-height: 45px;
+                        }
+                    }
+                    .subtitle {
+                        font-size: 20px;
+                        line-height: 23px;
+                    }
+                }
+                .infos {
+                    font-size: 22px;
+
+                    .row {
+                        .light {
+                            font-size: 20px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

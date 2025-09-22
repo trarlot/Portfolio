@@ -7,7 +7,7 @@ import Contact from '../Contact';
 import Dandadan from '../Dandadan';
 import styles from './styles.module.scss';
 import Modal from '../Modal';
-import DoigtsDeFee from '../DoigstDeFee';
+import Metanoia from '../Metanoia';
 import Lenis from 'lenis';
 import { useModalContext } from '@/context/modalContext';
 
@@ -25,8 +25,8 @@ function CarousselContent({ firstArray, secondArray, mainArray }) {
     useEffect(() => {
         if (selectedCard) {
             switch (selectedCard.id) {
-                case 'doigtsDeFee':
-                    setCurrentComponent(<DoigtsDeFee />);
+                case 'metanoia':
+                    setCurrentComponent(<Metanoia />);
                     break;
                 case 'electricCars':
                     setCurrentComponent(<ElectricCars />);

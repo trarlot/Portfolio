@@ -276,7 +276,7 @@ const ElectricCars = () => {
                     src={eec}
                     width={400}
                     height={792}
-                    alt="Doigts de fée home page"
+                    alt="Electric Cars home page"
                 />
                 <div className={styles.text}>
                     <div className={styles.textHeader}>

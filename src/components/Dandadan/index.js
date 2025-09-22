@@ -16,7 +16,7 @@ const saira_init = Saira_Condensed({
     subsets: ['latin'],
 });
 
-const DoigtsDeFee = () => {
+const Dandadan = () => {
     const bannerRef = useRef(null);
     const doigtsRef = useRef(null);
     const deRef = useRef(null);
@@ -378,4 +378,4 @@ const DoigtsDeFee = () => {
     );
 };
 
-export default DoigtsDeFee;
+export default Dandadan;

@@ -10,8 +10,8 @@ export const cardDDD = {
     id: 'dandadan',
 };
 
-export const cardDDF = {
-    id: 'doigtsDeFee',
+export const cardMetanoia = {
+    id: 'metanoia',
 };
 export const cardECC = {
     id: 'electricCars',
@@ -121,11 +121,11 @@ export const cardMiddle = [
     },
     {
         color: 'rgb(0, 0, 0)',
-        id: 'doigtsDeFee',
-        hover: 'DOIGTS DE FEE',
+        id: 'metanoia',
+        hover: 'METANOIA',
         imgUrl: '/assets/ClickIcon.png',
-        bg: '/assets/doigtsdefee.jpg',
-        imgTitle: 'cover doigts de fee',
+        bg: '/assets/metacard.jpg',
+        imgTitle: 'cover metanoia',
     },
     {
         color: 'rgb(55, 55, 55)',

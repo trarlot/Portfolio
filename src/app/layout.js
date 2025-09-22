@@ -64,35 +64,15 @@ export default function RootLayout({ children }) {
                     type="video/mp4"
                 />
 
-                <link rel="preload" href="/assets/doigtsdefee.jpg" as="image" />
+                <link rel="preload" href="/assets/meta.jpg" as="image" />
+                <link rel="preload" href="/assets/meta1.jpg" as="image" />
+                <link rel="preload" href="/assets/meta2.jpg" as="image" />
+                <link rel="preload" href="/assets/meta3.jpg" as="image" />
+                <link rel="preload" href="/assets/meta4.jpg" as="image" />
+                <link rel="preload" href="/assets/metacard.jpg" as="image" />
                 <link
                     rel="preload"
-                    href="/assets/doigts-de-fee-website.jpg"
-                    as="image"
-                />
-                <link
-                    rel="preload"
-                    href="/assets/doigts-de-fee-website-2.jpg"
-                    as="image"
-                />
-                <link
-                    rel="preload"
-                    href="/assets/doigts-de-fee-website-3.jpg"
-                    as="image"
-                />
-                <link
-                    rel="preload"
-                    href="/assets/doigts-de-fee-website-4.jpg"
-                    as="image"
-                />
-                <link
-                    rel="preload"
-                    href="/assets/doigts-de-fee-video-poster.jpg"
-                    as="image"
-                />
-                <link
-                    rel="preload"
-                    href="/assets/doigts-de-fee-video.mp4"
+                    href="/assets/meta.mov"
                     as="video"
                     type="video/mp4"
                 />
