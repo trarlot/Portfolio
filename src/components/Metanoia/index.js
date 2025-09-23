@@ -4,7 +4,7 @@ import { gsap } from 'gsap';
 import { useRef, useEffect } from 'react';
 import { Saira_Condensed } from 'next/font/google';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import meta from '@/../public/assets/meta.jpg';
+import meta from '@/../public/assets/metacard2.jpg';
 import meta1 from '@/../public/assets/meta1.jpg';
 import meta2 from '@/../public/assets/meta2.jpg';
 import meta3 from '@/../public/assets/meta3.jpg';

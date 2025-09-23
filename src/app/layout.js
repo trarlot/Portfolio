@@ -70,6 +70,7 @@ export default function RootLayout({ children }) {
                 <link rel="preload" href="/assets/meta3.jpg" as="image" />
                 <link rel="preload" href="/assets/meta4.jpg" as="image" />
                 <link rel="preload" href="/assets/metacard.jpg" as="image" />
+                <link rel="preload" href="/assets/metacard2.jpg" as="image" />
                 <link
                     rel="preload"
                     href="/assets/meta.mov"
