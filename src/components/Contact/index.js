@@ -246,13 +246,13 @@ const Contact = () => {
             </div>
             <div ref={contentRef} className={styles.content}>
                 <div className={styles.reseaux}>
-                    <a
+                    {/* <a
                         ref={instaRef}
                         target="_blank"
                         href="https://www.instagram.com/tristan_arlt/"
                         className={styles.reseau}>
                         Instagram
-                    </a>
+                    </a> */}
                     <a
                         ref={linkedinRef}
                         target="_blank"
