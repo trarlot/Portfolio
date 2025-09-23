@@ -19,7 +19,7 @@ const Contact = () => {
     const togetherRef = useRef(null);
     const subtitlesRef = useRef(null);
     const contentRef = useRef(null);
-    const instaRef = useRef(null);
+    // const instaRef = useRef(null);
     const linkedinRef = useRef(null);
     const gitRef = useRef(null);
     const buttonRef = useRef(null);
@@ -100,64 +100,58 @@ const Contact = () => {
                 if (contentRef.current) {
                     // Désactiver la transition CSS
                     [
-                        instaRef.current,
+                        // instaRef.current,
                         linkedinRef.current,
                         gitRef.current,
                     ].forEach((ref) => {
                         ref.style.transition = 'none'; // Désactiver
                     });
 
-                    gsap.to(
-                        [instaRef.current, linkedinRef.current, gitRef.current],
-                        {
-                            opacity: 1,
-                            y: 0,
-                            duration: 0.3,
-                            stagger: 0.1,
-                            onComplete: () => {
-                                // Réactiver la transition CSS après l'animation
-                                [
-                                    instaRef.current,
-                                    linkedinRef.current,
-                                    gitRef.current,
-                                ].forEach((ref) => {
-                                    ref.style.transition = '.3s'; // Réactiver
-                                });
-                            },
+                    gsap.to([linkedinRef.current, gitRef.current], {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.3,
+                        stagger: 0.1,
+                        onComplete: () => {
+                            // Réactiver la transition CSS après l'animation
+                            [
+                                // instaRef.current,
+                                linkedinRef.current,
+                                gitRef.current,
+                            ].forEach((ref) => {
+                                ref.style.transition = '.3s'; // Réactiver
+                            });
                         },
-                    );
+                    });
                 }
             },
             onEnterBack: () => {
                 if (contentRef.current) {
                     // Désactiver la transition CSS
                     [
-                        instaRef.current,
+                        // instaRef.current,
                         linkedinRef.current,
                         gitRef.current,
                     ].forEach((ref) => {
                         ref.style.transition = 'none'; // Désactiver
                     });
 
-                    gsap.to(
-                        [instaRef.current, linkedinRef.current, gitRef.current],
-                        {
-                            opacity: 0,
-                            y: 100,
-                            duration: 0.3,
-                            stagger: 0.1,
-                            onComplete: () => {
-                                // Réactiver la transition CSS après l'animation
-                                [
-                                    instaRef.current,
-                                    linkedinRef.current,
-                                    gitRef.current,
-                                ].forEach((ref) => {
-                                    ref.style.transition = '.3s'; // Réactiver
-                                });
-                            },
+                    gsap.to([linkedinRef.current, gitRef.current], {
+                        opacity: 0,
+                        y: 100,
+                        duration: 0.3,
+                        stagger: 0.1,
+                        onComplete: () => {
+                            // Réactiver la transition CSS après l'animation
+                            [
+                                // instaRef.current,
+                                linkedinRef.current,
+                                gitRef.current,
+                            ].forEach((ref) => {
+                                ref.style.transition = '.3s'; // Réactiver
+                            });
                         },
-                    );
+                    });
                 }
             },
         });
