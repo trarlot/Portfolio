@@ -14,6 +14,7 @@ import stylesWrapper from '../../components/CarousselWrapper/styles.module.scss'
 const saira_init = Saira_Condensed({
     weight: ['800'],
     subsets: ['latin'],
+    display: 'swap',
 });
 
 const Dandadan = () => {
@@ -281,6 +282,7 @@ const Dandadan = () => {
                     priority
                     quality={60}
                     sizes="(max-width: 900px) 80vw, 430px"
+                    placeholder="blur"
                     alt="Doigts de fée home page"
                 />
                 <div className={styles.text}>
@@ -362,6 +364,7 @@ const Dandadan = () => {
                         height={801}
                         quality={60}
                         sizes="(max-width: 900px) 90vw, 800px"
+                        placeholder="blur"
                         alt="Doigts de fée accueil"
                     />
                     <Image
@@ -372,6 +375,7 @@ const Dandadan = () => {
                         height={801}
                         quality={60}
                         sizes="(max-width: 900px) 90vw, 800px"
+                        placeholder="blur"
                         alt="Doigts de fée intro"
                     />
                     <Image
@@ -382,6 +386,7 @@ const Dandadan = () => {
                         height={801}
                         quality={60}
                         sizes="(max-width: 900px) 90vw, 800px"
+                        placeholder="blur"
                         alt="Doigts de fée salon "
                     />
                     <Image
@@ -392,6 +397,7 @@ const Dandadan = () => {
                         height={801}
                         quality={60}
                         sizes="(max-width: 900px) 90vw, 800px"
+                        placeholder="blur"
                         alt="Doigts de fée menu "
                     />
                 </div>

@@ -322,7 +322,7 @@ const ElectricCars = () => {
                             </p>
                             <p className={styles.light}>
                                 <span ref={reactContentRef}>
-                                    HTML/CSS/JS, GSAP
+                                    React, Next, GSAP
                                 </span>
                             </p>
                         </div>

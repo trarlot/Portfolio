@@ -4,7 +4,7 @@ import { useNavigateContext, NavigateProvider } from '@/context/navContaxt';
 import { useModalContext, ModalProvider } from '@/context/modalContext';
 import './globals.css';
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ['latin'], display: 'swap' });
 
 export const metadata = {
     title: 'Tristan Arlot | Freelance Designer & Developer',
@@ -33,12 +33,6 @@ export default function RootLayout({ children }) {
     return (
         <html lang="en">
             <head>
-                <link
-                    rel="preconnect"
-                    href="https://fonts.gstatic.com"
-                    crossOrigin="anonymous"
-                />
-                <link rel="preconnect" href="https://fonts.googleapis.com" />
                 <meta name="apple-mobile-web-app-capable" content="yes" />
                 <meta
                     name="apple-mobile-web-app-status-bar-style"
