@@ -1,25 +1,31 @@
 {
-  "name": "portfolio",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "@fortawesome/free-brands-svg-icons": "^6.6.0",
-    "@fortawesome/free-regular-svg-icons": "^6.6.0",
-    "@fortawesome/free-solid-svg-icons": "^6.6.0",
-    "@fortawesome/react-fontawesome": "^0.2.2",
-    "framer-motion": "^11.11.10",
-    "gsap": "^3.12.5",
-    "lenis": "^1.1.13",
-    "next": "^14.2.16",
-    "react": "^18",
-    "react-dom": "^18",
-    "sass": "^1.77.8",
-    "sharp": "^0.33.5"
-  }
+    "name": "portfolio",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "lint": "next lint"
+    },
+    "dependencies": {
+        "@fortawesome/free-brands-svg-icons": "^6.6.0",
+        "@fortawesome/free-regular-svg-icons": "^6.6.0",
+        "@fortawesome/free-solid-svg-icons": "^6.6.0",
+        "@fortawesome/react-fontawesome": "^0.2.2",
+        "framer-motion": "^11.11.10",
+        "gsap": "^3.12.5",
+        "lenis": "^1.1.13",
+        "next": "^14.2.16",
+        "react": "^18",
+        "react-dom": "^18",
+        "sass": "^1.77.8",
+        "sharp": "^0.33.5"
+    },
+    "browserslist": [
+        "last 2 Chrome versions",
+        "last 2 Safari versions",
+        "last 2 iOS versions",
+        "last 2 Firefox versions"
+    ]
 }

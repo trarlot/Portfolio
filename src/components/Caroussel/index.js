@@ -3,7 +3,7 @@ import styles from './styles.module.scss';
 import stylesMain from '../../app/page.module.css';
 import { useRef, useEffect, useState, useLayoutEffect } from 'react';
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/all';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Card from './Card';
 import { useModalContext } from '@/context/modalContext';
 import { useNavigateContext } from '@/context/navContaxt';

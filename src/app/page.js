@@ -15,6 +15,23 @@ import { useState, useEffect } from 'react';
 
 export default function Home() {
     const [isLoading, setIsLoading] = useState(true);
+    const warmImages = [
+        '/assets/metacard.jpg',
+        '/assets/metacard2.jpg',
+        '/assets/meta.jpg',
+        '/assets/meta1.jpg',
+        '/assets/meta2.jpg',
+        '/assets/meta3.jpg',
+        '/assets/meta4.jpg',
+        '/assets/dandadanCover.png',
+        '/assets/okarun.png',
+        '/assets/momo.png',
+        '/assets/Seiko.png',
+        '/assets/aira.png',
+        '/assets/electriccars5.jpg',
+        '/assets/EEC.jpg',
+        '/assets/tristan.jpg',
+    ];
 
     if (
         typeof window !== 'undefined' &&
@@ -42,6 +59,21 @@ export default function Home() {
         setTimeout(() => {
             setIsLoading(false);
             document.body.style.cursor = 'default';
+            // Warm up modal images after initial paint
+            const idle =
+                window.requestIdleCallback ||
+                function (cb) {
+                    return setTimeout(cb, 1);
+                };
+            idle(() => {
+                warmImages.forEach((src) => {
+                    const link = document.createElement('link');
+                    link.rel = 'prefetch';
+                    link.as = 'image';
+                    link.href = src;
+                    document.head.appendChild(link);
+                });
+            });
         }, 2500);
     }, []);
 

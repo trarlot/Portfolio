@@ -1,9 +1,9 @@
 import styles from './styles.module.scss';
 import Image from 'next/image';
-import { gsap } from 'gsap';
 import { useRef, useEffect } from 'react';
 import { Saira_Condensed } from 'next/font/google';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+let gsapRef;
+let ScrollTriggerRef;
 import ddd from '@/../public/assets/dandadanCover.png';
 import ddd1 from '@/../public/assets/okarun.png';
 import ddd2 from '@/../public/assets/momo.png';
@@ -38,86 +38,97 @@ const Dandadan = () => {
 
     useEffect(() => {
         if (!animationExecuted.current) {
-            gsap.registerPlugin(ScrollTrigger);
-            if (window.matchMedia('(min-width: 1024px)').matches) {
-                gsap.fromTo(
-                    bannerRef.current,
-                    { xPercent: -110 },
+            (async () => {
+                if (!gsapRef) {
+                    const { default: gsapMod } = await import('gsap');
+                    const { ScrollTrigger: ST } = await import(
+                        'gsap/ScrollTrigger'
+                    );
+                    gsapRef = gsapMod;
+                    ScrollTriggerRef = ST;
+                    gsapRef.registerPlugin(ScrollTriggerRef);
+                }
+
+                if (window.matchMedia('(min-width: 1024px)').matches) {
+                    gsapRef.fromTo(
+                        bannerRef.current,
+                        { xPercent: -110 },
+                        {
+                            delay: 0.5,
+                            xPercent: 0,
+                            duration: 0.4,
+                            ease: 'power1.out',
+                        },
+                    );
+                } else {
+                    gsapRef.fromTo(
+                        bannerRef.current,
+                        { yPercent: 20 },
+                        {
+                            delay: 0.2,
+                            yPercent: 0,
+                            duration: 0.5,
+                            ease: 'power1.out',
+                        },
+                    );
+                }
+                // Animations de texte
+                gsapRef.fromTo(
+                    [
+                        doigtsRef.current,
+                        deRef.current,
+                        feeRef.current,
+                        subtitlesRef.current,
+                    ],
+                    { yPercent: -110 },
                     {
-                        delay: 0.5,
-                        xPercent: 0,
-                        duration: 0.4,
-                        ease: 'power1.out',
-                    },
-                );
-            } else {
-                gsap.fromTo(
-                    bannerRef.current,
-                    { yPercent: 20 },
-                    {
-                        delay: 0.2,
+                        delay: 0.4,
+                        stagger: 0.1,
                         yPercent: 0,
-                        duration: 0.5,
+                        duration: 0.3,
                         ease: 'power1.out',
                     },
                 );
-            }
-            // Animations de texte
-            gsap.fromTo(
-                [
-                    doigtsRef.current,
-                    deRef.current,
-                    feeRef.current,
-                    subtitlesRef.current,
-                ],
-                { yPercent: -110 },
-                {
-                    delay: 0.4,
-                    stagger: 0.1,
-                    yPercent: 0,
-                    duration: 0.3,
-                    ease: 'power1.out',
-                },
-            );
 
-            gsap.fromTo(
-                [
-                    dateRef.current,
-                    julyRef.current,
-                    rolesRef.current,
-                    devRef.current,
-                    techsRef.current,
-                    reactRef.current,
-                ],
-                { yPercent: 110 },
-                {
-                    delay: 0.8,
-                    stagger: 0.1,
-                    yPercent: 0,
-                    duration: 0.3,
-                    ease: 'power1.out',
-                },
-            );
+                gsapRef.fromTo(
+                    [
+                        dateRef.current,
+                        julyRef.current,
+                        rolesRef.current,
+                        devRef.current,
+                        techsRef.current,
+                        reactRef.current,
+                    ],
+                    { yPercent: 110 },
+                    {
+                        delay: 0.8,
+                        stagger: 0.1,
+                        yPercent: 0,
+                        duration: 0.3,
+                        ease: 'power1.out',
+                    },
+                );
 
-            // Configuration du ScrollTrigger après 500ms
-            setTimeout(() => {
-                configureScrollTrigger();
-            }, 500);
+                // Configuration du ScrollTrigger après 500ms
+                setTimeout(() => {
+                    configureScrollTrigger();
+                }, 500);
 
-            animationExecuted.current = true; // Marque l'animation comme exécutée
+                animationExecuted.current = true; // Marque l'animation comme exécutée
+            })();
         }
     }, []); // Ajoute isOpen dans les dépendances
     // Expose la fonction pour configurer le ScrollTrigger
 
     const configureScrollTrigger = () => {
-        ScrollTrigger.create({
+        ScrollTriggerRef.create({
             trigger: photo1Ref.current,
             start: 'top bottom',
             end: 'top bottom',
             scroller: `.${stylesWrapper.container_modal}`,
             onEnter: () => {
                 if (photo1Ref.current) {
-                    gsap.to(
+                    gsapRef.to(
                         photo1Ref.current,
 
                         {
@@ -132,7 +143,7 @@ const Dandadan = () => {
             },
             onEnterBack: () => {
                 if (photo1Ref.current) {
-                    gsap.to(photo1Ref.current, {
+                    gsapRef.to(photo1Ref.current, {
                         opacity: 0,
                         y: 50,
                         duration: 0.3,
@@ -142,7 +153,7 @@ const Dandadan = () => {
                 }
             },
         });
-        ScrollTrigger.create({
+        ScrollTriggerRef.create({
             trigger: photo2Ref.current,
             start: 'top bottom',
             end: 'top bottom',
@@ -150,7 +161,7 @@ const Dandadan = () => {
 
             onEnter: () => {
                 if (photo2Ref.current) {
-                    gsap.to(
+                    gsapRef.to(
                         photo2Ref.current,
 
                         {
@@ -165,7 +176,7 @@ const Dandadan = () => {
             },
             onEnterBack: () => {
                 if (photo2Ref.current) {
-                    gsap.to(photo2Ref.current, {
+                    gsapRef.to(photo2Ref.current, {
                         opacity: 0,
                         y: 50,
                         duration: 0.3,
@@ -175,14 +186,14 @@ const Dandadan = () => {
                 }
             },
         });
-        ScrollTrigger.create({
+        ScrollTriggerRef.create({
             trigger: photo3Ref.current,
             start: 'top-=400px bottom',
             end: 'top-=400px bottom',
             scroller: `.${stylesWrapper.container_modal}`,
             onEnter: () => {
                 if (photo3Ref.current) {
-                    gsap.to(photo3Ref.current, {
+                    gsapRef.to(photo3Ref.current, {
                         opacity: 1,
                         y: 0,
                         duration: 0.5,
@@ -192,7 +203,7 @@ const Dandadan = () => {
             },
             onEnterBack: () => {
                 if (photo3Ref.current) {
-                    gsap.to(photo3Ref.current, {
+                    gsapRef.to(photo3Ref.current, {
                         opacity: 0,
                         y: 50,
                         duration: 0.3,
@@ -201,14 +212,14 @@ const Dandadan = () => {
                 }
             },
         });
-        ScrollTrigger.create({
+        ScrollTriggerRef.create({
             trigger: photo4Ref.current,
             start: 'top-=500px bottom',
             end: 'top-=500px bottom',
             scroller: `.${stylesWrapper.container_modal}`,
             onEnter: () => {
                 if (photo4Ref.current) {
-                    gsap.to(photo4Ref.current, {
+                    gsapRef.to(photo4Ref.current, {
                         opacity: 1,
                         y: 0,
                         duration: 0.5,
@@ -218,7 +229,7 @@ const Dandadan = () => {
             },
             onEnterBack: () => {
                 if (photo4Ref.current) {
-                    gsap.to(photo4Ref.current, {
+                    gsapRef.to(photo4Ref.current, {
                         opacity: 0,
                         y: 50,
                         duration: 0.3,
@@ -228,14 +239,14 @@ const Dandadan = () => {
             },
         });
 
-        ScrollTrigger.create({
+        ScrollTriggerRef.create({
             trigger: containerVideoRef.current,
             start: 'top bottom',
             end: 'top bottom',
             scroller: `.${stylesWrapper.container_modal}`,
             onEnter: () => {
                 if (videoRef.current) {
-                    gsap.to(videoRef.current, {
+                    gsapRef.to(videoRef.current, {
                         opacity: 1,
                         y: 0,
                         duration: 0.5,
@@ -245,7 +256,7 @@ const Dandadan = () => {
             },
             onEnterBack: () => {
                 if (videoRef.current) {
-                    gsap.to(videoRef.current, {
+                    gsapRef.to(videoRef.current, {
                         opacity: 0,
                         y: 50,
                         duration: 0.3,
@@ -255,7 +266,7 @@ const Dandadan = () => {
             },
         });
 
-        ScrollTrigger.refresh(true);
+        ScrollTriggerRef.refresh(true);
     };
 
     return (
@@ -267,6 +278,9 @@ const Dandadan = () => {
                     src={ddd}
                     width={430}
                     height={700}
+                    priority
+                    quality={60}
+                    sizes="(max-width: 900px) 80vw, 430px"
                     alt="Doigts de fée home page"
                 />
                 <div className={styles.text}>
@@ -346,6 +360,8 @@ const Dandadan = () => {
                         src={ddd1}
                         width={1047}
                         height={801}
+                        quality={60}
+                        sizes="(max-width: 900px) 90vw, 800px"
                         alt="Doigts de fée accueil"
                     />
                     <Image
@@ -354,6 +370,8 @@ const Dandadan = () => {
                         src={ddd2}
                         width={1047}
                         height={801}
+                        quality={60}
+                        sizes="(max-width: 900px) 90vw, 800px"
                         alt="Doigts de fée intro"
                     />
                     <Image
@@ -362,6 +380,8 @@ const Dandadan = () => {
                         src={ddd3}
                         width={1047}
                         height={801}
+                        quality={60}
+                        sizes="(max-width: 900px) 90vw, 800px"
                         alt="Doigts de fée salon "
                     />
                     <Image
@@ -370,6 +390,8 @@ const Dandadan = () => {
                         src={ddd4}
                         width={1047}
                         height={801}
+                        quality={60}
+                        sizes="(max-width: 900px) 90vw, 800px"
                         alt="Doigts de fée menu "
                     />
                 </div>
